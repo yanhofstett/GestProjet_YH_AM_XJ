@@ -2,8 +2,8 @@
 
 /**
  * ETML
- * Auteur :  Cindy Hardegger
- * Date: 22.01.2019
+ * Auteur :  Yann Hofstetter
+ * Date: 30.01.2023
  * Site web en MVC et orienté objet
  */
 
@@ -16,6 +16,7 @@ if ($debug) {
 }
 date_default_timezone_set('Europe/Zurich');
 
+include_once 'src/php/controller/homeController.php';
 /*
 include_once 'controller/Controller.php';
 include_once 'controller/HomeController.php';
@@ -30,8 +31,8 @@ class MainController {
     public function dispatch() {
 
         if (!isset($_GET['controller'])) {
-            $_GET['controller'] = 'customer';
-            $_GET['action'] = 'list';
+            $_GET['controller'] = 'home';
+            $_GET['action'] = 'connecting';
         }
 
 
@@ -49,7 +50,7 @@ class MainController {
 
         switch($controller){
             case 'home':
-                $link = new HomeController();
+                $link = new homeController();
                 break;
             case 'customer':
                 $link = new CustomerController();
