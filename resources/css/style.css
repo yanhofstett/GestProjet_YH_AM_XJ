@@ -1,0 +1,47 @@
+
+.titreTableauRecipes
+{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#imageAdd
+{
+    margin-left: 5%;
+}
+
+.tableauRecipes td
+{
+    border-width:1px 0px 0px 0px;
+    border-style: ridge;
+    font-size: 20px;
+}
+
+.imageOption
+{
+    color: black;
+    text-decoration: none;
+}
+
+#copyright
+{
+    text-align: center;
+}
+
+#login
+{
+    margin-top: 3%;
+    margin-right: 35%;
+    margin-left: 35%;
+}
+
+.textInfo
+{
+    font-size: 10px;
+    margin-bottom: 0.6px;
+}
+
+#condition_moderation
+{
+    font-size: 11px;
+}
