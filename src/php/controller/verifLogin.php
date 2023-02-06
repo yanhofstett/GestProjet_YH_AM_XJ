@@ -1,8 +1,8 @@
 <?php
 /**
- * Auteur : Yann Hofstetter
- * Date : 05.10.2022
- * Description : toutes les requettes pour intéragire avec la db
+ * Auteur : Alexandre Montandon, Xavier Jaquet, Yann Hofstetter
+ * Date : 06.02.2023
+ * Description : la page qui va verifier si la personne c'est connecté avec les bonnes informations
  */
 
     // Démarrer le système de session
@@ -28,7 +28,7 @@
         <meta charset="utf-8" />
         <link href="../../resources/css/Style.css" rel="stylesheet" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <title>Verification du Login</title>
     </head>
 
     <body>
