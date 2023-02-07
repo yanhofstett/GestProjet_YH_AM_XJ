@@ -82,3 +82,6 @@ create table if not exists t_select (
 -- creation de l'utilisateur
 CREATE USER IF NOT EXISTS 'db_PGest042'@'localhost' IDENTIFIED BY 'AXY';
 GRANT SELECT,INSERT,UPDATE,DELETE ON db_sport.* TO 'db_PGest042'@'localhost';
+
+-- modification de la table des séléction pour mettre une valeur par défaut (a 0) a la collone si oui ou non le coache l'a valider (car par défaut c'est non)
+ALTER TABLE `t_select` CHANGE `validateCoach` `validateCoach` TINYINT(1) NOT NULL DEFAULT '0';

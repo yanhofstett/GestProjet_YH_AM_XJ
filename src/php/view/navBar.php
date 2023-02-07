@@ -29,29 +29,11 @@
                 <img src="resources/images/login_logo.png" alt="login_logo" width="32" height="32" class="rounded-circle">
             </a>
             <ul class="dropdown-menu text-small">
-                <?php
-                    //regarde si l'utilisateur est connecté pour afficher ou non l'option pour acceder au profil
-                    if (isset($_SESSION["isConnected"]))
-                    {
-                ?>
+                <!--ajoute les options de la liste déroulante-->
                 <li><a class="dropdown-item" href="#">Profil</a></li>
-                <li><a class="dropdown-item" href="#">Historique de mes questions</a></li>
-                <?php
-                    }
-                    else
-                    {
-                ?>
-                <li><a class="dropdown-item" href="#">Historique des questions de tout les utilisateur</a></li>
-                <?php
-                    }
-                    //regarde que l'utilisateur est admin pour afficher ou non l'option pour acceder à la page de toutes les questions
-                    if (isset($_SESSION["isAdministrator"]))
-                    {
-                ?>
-                <li><a class="dropdown-item" href="#">Questions des utilisateurs</a></li>
-                <?php
-                    }
-                ?>
+                <li><a class="dropdown-item" href="#">Conversation avec les coache</a></li>
+                
+                <!--met un trait pour séparer les option-->
                 <li><hr class="dropdown-divider"></li>
                 
                 <!--affiche le bouton pour se déconnecté du site-->
