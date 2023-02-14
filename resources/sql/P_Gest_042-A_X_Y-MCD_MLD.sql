@@ -85,3 +85,6 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON db_sport.* TO 'db_PGest042'@'localhost';
 
 -- modification de la table des séléction pour mettre une valeur par défaut (a 0) a la collone si oui ou non le coache l'a valider (car par défaut c'est non)
 ALTER TABLE `t_select` CHANGE `validateCoach` `validateCoach` TINYINT(1) NOT NULL DEFAULT '0';
+
+-- modification de la table des message pour mettre une collone pour savoir qui a envoyer le message
+ALTER TABLE `t_message` ADD `fkMessageSendBy` VARCHAR(11) NOT NULL AFTER `fkAthlete`;

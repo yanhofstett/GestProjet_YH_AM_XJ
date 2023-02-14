@@ -21,10 +21,17 @@ Description : page qui permet de rediriger ver les différentes page de notre si
     //commence le système de session
     session_start();
 
+    //ajoute le fichier qui gère les requette SQL
+    include 'src/php/controller/config.php';
+    require "src/php/model/modelDB.php";
+
     session_destroy();
     $_SESSION["isConnected"]=1;
     $_SESSION["isAthlete"]=1;
+    $_SESSION["email"]="hfhu9hff";
+    //$_SESSION["email"]="hfhu9hgg";
     //$_SESSION["isCoach"]=1;
+    //$_SESSION["email"]="uzguzg1";
 
     //regarde si l'utilisateur n'est pas connecter pour le rediriger ver la page de connection (car pour visité le site on doit être connecté)
     if(!isset($_SESSION["isConnected"]))
@@ -40,20 +47,44 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         //regarde si il est athlète
         if (isset($_SESSION["isAthlete"]))
         {
-            $_GET['page'] = 'meetingForAthlete';
+            $_GET['page'] = 'meetAthlete';
         }
         //sinon regarde si il est coache
         else if (isset($_SESSION["isCoach"]))
         {
-            $_GET['page'] = 'meetingForCoach';
+            $_GET['page'] = 'meetCoach';
+        }
+        else
+        {
+            $_GET['page'] = "";
         }
     }
 
     //affiche la barre de navigation
     include("src/php/view/navBar.php");
 
+    //regarde sur quelle page il veut aller
+    switch($_GET["page"])
+    {
+        case "meetAthlete":
+            $pageChose = "meetingForAthlete";
+            break;
+        case "meetCoach":
+            $pageChose = "meetingForCoach";
+            break;
+        case "conv":
+            $pageChose = "conversation";
+            break;
+        case "convDetail":
+            $pageChose = "conversationDetailMessage";
+            break;
+        default:
+            $pageChose = "error";
+            break;
+    }
+
     //redirige ver la page demandé
-    include("src/php/view/".$_GET['page'].".php");
+    include("src/php/view/".$pageChose.".php");
 
     //affiche le footer
     include("src/html/footer.html");

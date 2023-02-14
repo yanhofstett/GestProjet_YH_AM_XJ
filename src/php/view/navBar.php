@@ -31,7 +31,7 @@
             <ul class="dropdown-menu text-small">
                 <!--ajoute les options de la liste déroulante-->
                 <li><a class="dropdown-item" href="#">Profil</a></li>
-                <li><a class="dropdown-item" href="#">Conversation avec les coache</a></li>
+                <li><a class="dropdown-item" href="./index.php?page=conv">Conversation avec les coache</a></li>
                 
                 <!--met un trait pour séparer les option-->
                 <li><hr class="dropdown-divider"></li>
