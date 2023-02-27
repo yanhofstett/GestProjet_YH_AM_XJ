@@ -147,6 +147,7 @@
             }
             else
             {
+<<<<<<< HEAD
                 // Redirige à la page de toutes les recettes avec un paramètre GET
                 header('location:login.php?msgConnexion=LPM');
 
@@ -177,3 +178,12 @@
         exit;
     }
 ?>
+=======
+                //redirige ver la page du menu principal
+                header("Location:../../");
+                exit;
+            }
+        ?>
+    </body>
+</html>
+>>>>>>> 19fb09e279e08197a4e0e499268884f4d7058448

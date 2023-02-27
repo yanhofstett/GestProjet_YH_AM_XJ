@@ -133,7 +133,7 @@ class Database
     public function getOneCoach($email)
     {
         //récupére l'id de l'utilisateur, le login, l'email, le mot de passe, si oui ou non il est admin
-        $query = "SELECT idCoach, coaName, coaSurname, coaEmail, coaPassword, coaExperience, coaImage FROM t_coach WHERE coaEmail = :coaEmail";
+        $query = "SELECT idCoach, coaName, coaSurname, coaEmail, coaPassword, coaPhone, coaExperience, coaImage FROM t_coach WHERE coaEmail = :coaEmail";
         //avoir la requête sql pour un utilisateur (utilisation de l'emial de l'utilisateur)
         $binds['coaEmail']=['value'=>$email,'type'=>PDO::PARAM_STR];
 
@@ -246,7 +246,7 @@ class Database
 
         $this->queryPrepareExecute($query, $binds);
     }
-
+    
 }
 
 
