@@ -7,10 +7,13 @@
 
     // Démarrer le système de session
     session_start();
-
-    include "Config.php";
-    require "Database.php";
     
+    // inclue la page 'database'
+    require_once("../model/modelDB.php");
+
+    // inclue la page 'config'
+    include_once("../controller/config.php");
+
     if (isset($_POST["btnSingIn"]))
     {
         $_SESSION["email"] = trim($_POST["email"]);
