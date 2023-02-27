@@ -37,7 +37,7 @@ Description : page qui permet de rediriger ver les différentes page de notre si
     if(!isset($_SESSION["isConnected"]))
     {
         //redirige ver la page de connection
-        header("Location:src/php/view/connection.php");
+        header("Location:src/php/view/login.php");
         exit;
     }
 

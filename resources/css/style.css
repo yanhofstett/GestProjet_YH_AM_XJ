@@ -1,47 +1,318 @@
+/*
+Auteur : Alexandre Montandon
+Date : 07.01.2023
+Description : CSS Pour toutes les pages du site
+*/
 
-.titreTableauRecipes
-{
-    font-weight: bold;
-    font-size: 20px;
+@font-face {
+    font-family: InterMedium;
+    src: url(../police/Inter-Medium.ttf);
 }
 
-#imageAdd
-{
-    margin-left: 5%;
+@font-face {
+    font-family: InterLight;
+    src: url(../police/Inter-Light.ttf);
 }
 
-.tableauRecipes td
-{
-    border-width:1px 0px 0px 0px;
-    border-style: ridge;
-    font-size: 20px;
+/*Style CSS pour le projet pour le site du module 151*/
+
+body{
+    color: #c4c4c4;
+    font-family: InterMedium;
 }
 
-.imageOption
-{
-    color: black;
+input{
+    border: 0.01px solid grey;
+    color: #c4c4c4;
+    background-color: #3a3a3b;
+    height: 40px;
+    width: 25%;
+    font-family: InterMedium;
+}
+
+label, h3, h2, h1, p, a{
+    color: #c4c4c4;
+    font-family: InterMedium;
+}
+
+textarea{
+    color: #c4c4c4!important;
+    border: 0.01px solid grey;
+    background-color: #3a3a3b;
+    height: 50px;
+    width: 220px;
+}
+
+select {
+    color: #c4c4c4!important;
+    background-color: #3a3a3b;
+}
+
+/*Style pour refaire bootstrap*/
+
+.container-lg, .container-md{
+    width: 70%;
+}
+
+.ftco-section {
+    padding: 16em 0;
+}
+
+.link-dark{
+    color: #c4c4c4!important;
+    font-family: InterMedium;
+}
+
+.form-control{
+    font-weight: 300;
+    background: transparent;
+    border: none;
+    height: 50px;
+    color: rgb(255, 255, 255) !important;
+    border: 2px solid;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}  
+
+::-ms-reveal {
+  filter: invert(100%);
+}
+
+.btn.btn-primary:hover{
+    font-weight: 300;
+    background: transparent;
+    border: none;
+    height: 50px;
+    color: rgb(255, 255, 255) !important;
+    border: 2px solid;
+    background: rgba(0, 0, 0, 0.08);
+    border-radius: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}  
+
+a {
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+    font-size: 100%;
+    
+}
+
+a:hover, a:focus {
+    color: #FFFFFF;
+    font-size: 95%;
     text-decoration: none;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none; 
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
 }
 
-#copyright
-{
-    text-align: center;
+/*Style pour les classes générales*/
+
+.dateAdded{
+    font-family: InterLight!important;
 }
 
-#login
-{
-    margin-top: 3%;
-    margin-right: 35%;
-    margin-left: 35%;
+.revenir{
+    margin: 35% 0% 0% -35%;
 }
 
-.textInfo
-{
-    font-size: 10px;
-    margin-bottom: 0.6px;
+.welcome{
+    margin: 1%!important;
+    font-family: InterLight!important;
 }
 
-#condition_moderation
-{
-    font-size: 11px;
+.revenirLoginLogout{
+    margin: 0.2% 0% 0% 1%;
 }
+
+.h3lastRecipes{
+    margin-left: 17%;
+}
+
+/*Style de la page index.php*/
+
+.htmlIndex{
+    font-family: Helvetica, sans-serif;
+    margin-left: 540px;
+
+}
+
+.linkPointed{
+    color: #db2f10;
+}
+
+.linkPointed:focus, .linkPointed:hover{
+    color: #db2f10;
+}
+
+.buttonDisconnect{
+    font-family: Helvetica, sans-serif;
+    font-size: 18px;
+    margin-left: 40px;
+}
+
+.labelConnectedAdmin{
+    font-family: Helvetica, sans-serif;
+    font-size: 15px;
+    margin: 10px;
+}
+
+.labelConnectedUser{
+    font-family: Helvetica, sans-serif;
+    font-size: 15px;
+    margin: 10px;
+}
+
+.allFormConnexion{
+    display: flex;
+    margin-bottom: 30px;
+    align-items: row;
+}
+
+.inputMailConnecter{
+    width: 200px;
+    margin-right: 100px;
+}
+
+.labelConnexion{
+    margin: 13px;
+}
+
+.buttonConnexion{
+    margin: 4px 0px 0px 5px;
+}
+
+.tableIndex{
+    justify-content: space-between;
+}
+
+.h1Titre{
+    margin-left: 180px;
+}
+
+.h2ListProduct{
+    margin-left: 270px;
+}
+
+.titreTab{
+    color: #c4c4c4!important;
+    font-family: InterMedium;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.iconPlus{
+    position: absolute;
+    height: 45px;
+    width: 45px;
+    margin: 240px 0px 0px 1220px
+}
+
+
+
+/*Style de la page pour toutes les recettes*/
+
+.textRecipes{
+-webkit-transition: .3s all ease;
+-o-transition: .3s all ease;
+transition: .3s all ease;
+font-weight: 400;
+color: #c4c4c4;
+font-family: InterLight;
+ 
+}
+
+.textRecipes:hover, .textRecipes:focus {
+    color: #2da7cc;
+    text-decoration: none;
+    outline: none;
+    font-size: 95%;
+    -webkit-box-shadow: none;
+    box-shadow: none; 
+}
+
+
+/*Style de la page info.php*/
+
+.htmlInfo{
+    font-family: Helvetica, sans-serif;
+    margin-left: 540px;
+}
+
+.barreSeparation{
+    width: 100px;
+}
+
+.h3info{
+    margin: 0% 0% 1% 17%;
+}
+
+.recCapacity{
+    margin-bottom: 50px;
+}
+
+.recDescription{
+    margin-bottom: 50px;
+}
+
+.recEnergy{
+    margin-bottom: 50px;
+}
+
+.recPrice{
+    margin-bottom: 50px;
+}
+
+.recCategory{
+    margin-bottom: 50px;
+}
+
+.divAjout{
+    margin-left: 270px;
+}
+/*Style de la page de registration*/
+
+.signin-form{
+position: absolute;
+width: 330px;  
+height: 360px;
+padding: 9px;
+background-color: rgba(0, 0, 0, 0.096);
+border-radius: 5px;
+}
+
+.login-form{
+    position: absolute;
+    width: 370px;
+    height: 220px;
+    padding: 9px;
+    background-color: rgba(0, 0, 0, 0.096);
+    border-radius: 5px;
+}
+
+/*Style de la page modify*/
+
+.formulaireModifie{
+    margin-left: 18%;
+}
+
+/*Style de la page d'ajout*/
+
+.formulaireAjout{
+    margin-left: 18%;
+}
+
+/*Style de la page pour suprimmer une donnée dans la base de donnée depuis le site*/
