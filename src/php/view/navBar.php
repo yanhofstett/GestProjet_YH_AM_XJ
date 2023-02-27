@@ -11,16 +11,16 @@
     <header class="p-3 mb-3 border-bottom">
         <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none" href="#">
+            <a class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none" href="./index.php">
                 <img src="../../resources/images/site_logo.png" width="32" height="32" alt="logo du site">
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 link-dark">Accueil</a></li>
+            <li><a href="./index.php" class="nav-link px-2 link-dark">Accueil</a></li>
             
-            <li><a href="#" class="nav-link px-2 link-secondary">Toutes les recettes</a></li>
+            <li><a href="#" class="nav-link px-2 link-secondary">#</a></li>
             
-            <li><a href="#" class="nav-link px-2 link-secondary">Nous contacter</a></li>
+            <li><a href="#" class="nav-link px-2 link-secondary">#</a></li>
             
             </ul>
             
@@ -31,7 +31,7 @@
             <ul class="dropdown-menu text-small">
                 <!--ajoute les options de la liste déroulante-->
                 <li><a class="dropdown-item" href="#">Profil</a></li>
-                <li><a class="dropdown-item" href="./index.php?page=conv">Conversation avec les coache</a></li>
+                <li><a class="dropdown-item" href="./index.php?page=conv">Conversation avec les coaches</a></li>
                 
                 <!--met un trait pour séparer les option-->
                 <li><hr class="dropdown-divider"></li>

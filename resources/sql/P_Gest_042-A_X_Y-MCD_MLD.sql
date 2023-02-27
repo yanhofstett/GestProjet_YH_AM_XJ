@@ -19,7 +19,7 @@ create table if not exists t_athlete (
      athSurname varchar(50) not null,
      athEmail varchar(254) not null,
      athPassword varchar(150) not null,
-     athPhone varchar(20) not null,
+     athPhone varchar(10) not null,
      athStreet varchar(100) not null,
      athTown varchar(100) not null,
      athNPA int(6) not null,
@@ -32,6 +32,7 @@ create table if not exists t_coach (
      coaSurname varchar(50) not null,
      coaEmail varchar(254) not null,
      coaPassword varchar(150) not null,
+     coaPhone varchar(20) not null,
      coaExperience varchar(1000) not null,
      coaImage varchar(100) not null,
      PRIMARY KEY (idCoach)

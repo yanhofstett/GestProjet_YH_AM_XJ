@@ -32,9 +32,5 @@
             header("Location:".$_SERVER[HTTP_REFERER]);
             exit;
         ?>
-
-        <br><br>
-        <hr>
-        <p id = "copyright">Copyright: Yann Hofstetter - 2022 </p>
     </body>
 </html>

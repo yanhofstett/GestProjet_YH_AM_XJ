@@ -44,15 +44,10 @@ Description : page qui permet de rediriger ver les différentes page de notre si
     //si il n'y a pas de GET dans l'URL (donc qu'il arrive pour la premiere fois sur le site)
     if (!isset($_GET['page'])) 
     {
-        //regarde si il est athlète
-        if (isset($_SESSION["isAthlete"]))
+        //regarde si il est athlète ou un coach
+        if (isset($_SESSION["isAthlete"]) || isset($_SESSION["isCoach"]))
         {
-            $_GET['page'] = 'meetAthlete';
-        }
-        //sinon regarde si il est coache
-        else if (isset($_SESSION["isCoach"]))
-        {
-            $_GET['page'] = 'meetCoach';
+            $_GET['page'] = 'meet';
         }
         else
         {
@@ -66,11 +61,8 @@ Description : page qui permet de rediriger ver les différentes page de notre si
     //regarde sur quelle page il veut aller
     switch($_GET["page"])
     {
-        case "meetAthlete":
-            $pageChose = "meetingForAthlete";
-            break;
-        case "meetCoach":
-            $pageChose = "meetingForCoach";
+        case "meet":
+            $pageChose = "meeting";
             break;
         case "conv":
             $pageChose = "conversation";

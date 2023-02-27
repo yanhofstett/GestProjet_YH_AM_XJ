@@ -71,8 +71,5 @@
                 exit;
             }
         ?>
-
-        <hr>
-        <p id = "copyright">Copyright: Yann Hofstetter - 2022 </p>
     </body>
 </html>
