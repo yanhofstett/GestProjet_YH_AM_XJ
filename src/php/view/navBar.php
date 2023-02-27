@@ -37,7 +37,7 @@
                 <li><hr class="dropdown-divider"></li>
                 
                 <!--affiche le bouton pour se déconnecté du site-->
-                <li><a class="dropdown-item" href="src/php/view/connection.php">Déconnexion</a></li>
+                <li><a class="dropdown-item" href="src/php/view/login.php">Déconnexion</a></li>
             </ul>
             </div>
         </div>
