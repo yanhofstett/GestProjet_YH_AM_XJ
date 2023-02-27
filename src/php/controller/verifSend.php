@@ -19,8 +19,8 @@
             Database::getInstance() -> createMessage($_POST["MessageFromUser"],$_POST["idAthlete"],$_POST["idCoach"],$_POST["idUser"]);
             
             //redirige ver la page de contacte
-            //header("Location:".$_SERVER[HTTP_REFERER]);
-            //exit;
+            header("Location:".$_SERVER[HTTP_REFERER]);
+            exit;
         }
         else
         {
