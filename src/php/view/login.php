@@ -4,123 +4,132 @@
     Description : Projet module 151 // Page de connection
     --->
 <?php
-    // inclue la page 'database'
-    require_once("../model/modelDB.php");
-
-    // inclue la page 'config'
-    include_once("../controller/config.php");
-
 	// Crée la session
 	session_start();
 
-	#region Code pour la création des varibles pour le retour en arrière
-    // Si le GET à été entré
-    if(isset($_GET['backInfo']))
+    //regarde si l'utilisateur n'est pas connecter
+    if (!isset($_SESSION["isConnected"]))
     {
-        // Si le GET est égal à BCTAR
-        if($_GET['backInfo']=='BCTAR')
-        {
-            // Désactive la variable pour retourner en arrière sur la page d'index
-            unset($_SESSION["backToIndex"]);
+        // inclue la page 'database'
+        require_once("../model/modelDB.php");
 
-            // Crée la variable de session pour retourner en arrière sur la page de toutes les recettes
-            $_SESSION["backToAllRecipes"] = 1;
-        }
-        // Sinon si le GET est égal à BCTI
-        else if($_GET['backInfo']=='BCTI')
-        {
-            // Désactiver la variable pour retourner en arrière sur la page de toutes les recettes
-            unset($_SESSION["backToAllRecipes"]);
+        // inclue la page 'config'
+        include_once("../controller/config.php");
 
-            // Crée la variable de session pour retourner en arrière sur la page d'index
-            $_SESSION["backToIndex"] = 1;
+        #region Code pour la création des varibles pour le retour en arrière
+        // Si le GET à été entré
+        if(isset($_GET['backInfo']))
+        {
+            // Si le GET est égal à BCTAR
+            if($_GET['backInfo']=='BCTAR')
+            {
+                // Désactive la variable pour retourner en arrière sur la page d'index
+                unset($_SESSION["backToIndex"]);
+
+                // Crée la variable de session pour retourner en arrière sur la page de toutes les recettes
+                $_SESSION["backToAllRecipes"] = 1;
+            }
+            // Sinon si le GET est égal à BCTI
+            else if($_GET['backInfo']=='BCTI')
+            {
+                // Désactiver la variable pour retourner en arrière sur la page de toutes les recettes
+                unset($_SESSION["backToAllRecipes"]);
+
+                // Crée la variable de session pour retourner en arrière sur la page d'index
+                $_SESSION["backToIndex"] = 1;
+            }
         }
+        #endregion
+
+        #region tout les messages quand on a effectué quelque chose sur le site
+        #region messages dans la page de toutes les recettes après avoir crée un compte
+        // Si le GET à été entré
+        if(isset($_GET['msgCreateUser']))
+        {
+            // Si le GET est égal à CUC
+            if($_GET['msgCreateUser']=='CUC')
+            {
+                // Afficher le message que la modification a réussi depuis le config.php
+                echo CREATE_USER_CORRECT;
+                ?>
+                <!-- Script Javascript -->
+                <script>
+                    //Crée un timeout qui va s'écouler avant de faire myFunction
+                    setTimeout(myFunction, 4000);
+
+                    // Création d'une fonction
+                    function myFunction()
+                    {    
+                        // Redirige vers la page de login
+                        location.href="login.php";
+                    }
+                // Fin du script
+                </script>
+
+                <!-- Ouvre le php -->
+                <?php   
+            }
+        }
+        // Si le GET à été entré
+        else if(isset($_GET['msgConnexion']))
+        {
+            // Si le GET est égal à CUC
+            if($_GET['msgConnexion']=='LEM')
+            {
+                // Afficher le message que la modification a réussi depuis le config.php
+                echo LOGIN_EMAIL_MISSING;
+                ?>
+                <!-- Script Javascript -->
+                <script>
+                    //Crée un timeout qui va s'écouler avant de faire myFunction
+                    setTimeout(myFunction, 4000);
+
+                    // Création d'une fonction
+                    function myFunction()
+                    {    
+                        // Redirige vers la page de login
+                        location.href="login.php";
+                    }
+                // Fin du script
+                </script>
+
+                <!-- Ouvre le php -->
+                <?php   
+            }
+            // Si le GET est égal à CUC
+            else if($_GET['msgConnexion']=='LPM')
+            {
+                // Afficher le message que la modification a réussi depuis le config.php
+                echo LOGIN_PASSWORD_MISSING;
+                ?>
+                <!-- Script Javascript -->
+                <script>
+                    //Crée un timeout qui va s'écouler avant de faire myFunction
+                    setTimeout(myFunction, 4000);
+
+                    // Création d'une fonction
+                    function myFunction()
+                    {    
+                        // Redirige vers la page de login
+                        location.href="login.php";
+                    }
+                // Fin du script
+                </script>
+
+                <!-- Ouvre le php -->
+                <?php   
+            }
+        }
+        #endregion
+
+        
+        #endregion
     }
-    #endregion
-
-	#region tout les messages quand on a effectué quelque chose sur le site
-    #region messages dans la page de toutes les recettes après avoir crée un compte
-	// Si le GET à été entré
-    if(isset($_GET['msgCreateUser']))
+    else
     {
-        // Si le GET est égal à CUC
-        if($_GET['msgCreateUser']=='CUC')
-        {
-            // Afficher le message que la modification a réussi depuis le config.php
-            echo CREATE_USER_CORRECT;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 4000);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page de login
-                    location.href="login.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php   
-        }
+        //détruit toutes les sessiones
+        session_destroy();
     }
-    // Si le GET à été entré
-    else if(isset($_GET['msgConnexion']))
-    {
-        // Si le GET est égal à CUC
-        if($_GET['msgConnexion']=='LEM')
-        {
-            // Afficher le message que la modification a réussi depuis le config.php
-            echo LOGIN_EMAIL_MISSING;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 4000);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page de login
-                    location.href="login.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php   
-        }
-        // Si le GET est égal à CUC
-        else if($_GET['msgConnexion']=='LPM')
-        {
-            // Afficher le message que la modification a réussi depuis le config.php
-            echo LOGIN_PASSWORD_MISSING;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 4000);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page de login
-                    location.href="login.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php   
-        }
-    }
-	#endregion
-
-    
-	#endregion
 
 ?>
 <!doctype html>

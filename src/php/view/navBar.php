@@ -12,7 +12,7 @@
         <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <a class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none" href="./index.php">
-                <img src="../../resources/images/site_logo.png" width="32" height="32" alt="logo du site">
+                <img src="resources/images/Logo-AXY.png" width="72" height="32" alt="logo du site">
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
