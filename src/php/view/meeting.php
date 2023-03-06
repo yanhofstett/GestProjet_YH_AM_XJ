@@ -16,6 +16,9 @@
 
     function coachDisplay($idCoachToDisplay)
     {
+        //récupère toutes les info sur l'utilisateur
+        $informationOfMe = Database::getInstance() -> getOneAthlete($_SESSION["email"]);
+
         do
         {
             //ajoute 1 a l'id du coach a afficher
@@ -28,15 +31,11 @@
             if (!empty($coachToDisplay))
             {
                 //regarde si le coach est déjà match (null si il y a pas de match corresspondant a cela)
-                $coachAlreadyMatch = Database::getInstance() -> coachAlreadyMatch($coachToDisplay[0]["idCoach"]);
-            }
-            else
-            {
-                $coachAlreadyMatch = null;
+                $coachAlreadyMatch = Database::getInstance() -> getOneCoachAlreadyMatch($informationOfMe["idAthlete"],$coachToDisplay[0]["idCoach"]);
             }
         }
         //recommence tant que la variable "coachToDisplay" est vide et que "coachAlreadyMatch" n'est pas null
-        while(empty($coachToDisplay) && $coachAlreadyMatch != null);
+        while(empty($coachToDisplay) || !empty($coachAlreadyMatch));
 
         echo "\n\n\n".$idCoachToDisplay."\n\n\n";
         var_dump($coachToDisplay);

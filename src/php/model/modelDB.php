@@ -146,6 +146,25 @@ class Database
         return $prepareTabTemp[0];
     }
 
+    public function checkIsAthleteOrCoach($email)
+    {
+        //appelle la méthode pour récupérer les info sur l'athlete
+        $status = $this->getOneAthlete($email);
+        //met la variable de session a 1 pour dire que c'est un athlete
+        $_SESSION["status"] = 1;
+
+        //regarde si la variable status est vide (donc que aucun athlete corresspond avec se mail)
+        if (empty($status))
+        {
+            //appelle la méthode pour récupérer les info sur le coach
+            $status = $this->getOneCoach($email);
+            //met la variable de session a 2 pour dire que c'est un coach
+            $_SESSION["status"] = 2;
+        }
+
+        return $status;
+    }
+
     /**
      * 
      */
@@ -260,13 +279,13 @@ class Database
 
         $prepareTabTemp = $this->formatData($prepareTemp);
 
-        return $prepareTabTemp[0];
+        return $prepareTabTemp;
     }
     
     /**
      * 
      */
-    public function getOnCoachAlreadyMatch($idAthlete,$idCoach)
+    public function getOneCoachAlreadyMatch($idAthlete,$idCoach)
     {
         $query = "SELECT fkAthlete, fkCoach, athEmail, coaEmail FROM t_select JOIN t_coach ON idCoach=fkCoach JOIN t_athlete ON idAthlete=fkAthlete WHERE fkAthlete = :idAthlete && fkCoach = :idCoach";
 
