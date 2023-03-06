@@ -247,6 +247,38 @@ class Database
         $this->queryPrepareExecute($query, $binds);
     }
     
+    /**
+     * 
+     */
+    public function findNextCoach($idCoachToDisplay)
+    {
+        $query = "SELECT idCoach,coaName,coaSurname,coaEmail,coaPassword,coaPhone,coaExperience,coaImage FROM t_coach WHERE idCoach = :idNextCoach";
+        
+        $binds["idNextCoach"]=["value"=>$idCoachToDisplay, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp[0];
+    }
+    
+    /**
+     * 
+     */
+    public function getOnCoachAlreadyMatch($idAthlete,$idCoach)
+    {
+        $query = "SELECT fkAthlete, fkCoach, athEmail, coaEmail FROM t_select JOIN t_coach ON idCoach=fkCoach JOIN t_athlete ON idAthlete=fkAthlete WHERE fkAthlete = :idAthlete && fkCoach = :idCoach";
+
+        $binds["idAthlete"]=["value"=>$idAthlete, "type"=>PDO::PARAM_INT];
+        $binds["idCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp;
+    }
 }
 
 
