@@ -238,7 +238,7 @@ class Database
     /**
      * 
      */
-    public function deletQuestion($idMessageToDelet)
+    public function deleteMessage($idMessageToDelet)
     {
         $query = "DELETE FROM t_message WHERE idMessage = :idMessage";
 
@@ -247,7 +247,27 @@ class Database
         $this->queryPrepareExecute($query, $binds);
     }
     
-}
+    /**
+    * Fonction pour se connecter au site
+    *Paramètre : $email*/
+    public function connexion($email)
+    {
+        // Requête SQL
+        $query = "SELECT usePseudo, useLogin, usePassword ,useAdministrator FROM t_user WHERE useLogin=:email";
 
+        // Mettre dans un bind la valeur de l'email
+        $binds['email']=['value'=>$email,'type'=>PDO::PARAM_STR];
+
+        // Executer avec une requête préparer la requête et avec le bind
+        $prepareTemp = $this->queryPrepareExecute($query, $binds);
+
+        // Retourner en tableau associatif
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        // Retourner le tableau
+        return $prepareTabTemp;
+    }
+
+}
 
 ?>

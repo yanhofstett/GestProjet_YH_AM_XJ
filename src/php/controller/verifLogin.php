@@ -1,6 +1,6 @@
 <?PHP
     /*
-    // Auteur : Alexandre Montandon
+    // Auteur : Alexandre Montandon, Xavier Jaquet, Yann Hofstetter
     // Date : 29.11.2022    
     // Description : Projet module 151 // Page pour chequez la connexion
     */
@@ -8,11 +8,12 @@
     // Commence la session
     session_start();
 
-    // inclue la page 'config'
-    include_once("config.php");
-
     // inclue la page 'database'
-    require_once("database.php");
+    require_once("../model/modelDB.php");
+
+    // inclue la page 'config'
+    include_once("../controller/config.php");
+
 
     // Regarde que le bouton "btnLogin" a bien été créer
     if (isset($_POST["btnLogin"]) || isset($_POST["btnLogout"]))
