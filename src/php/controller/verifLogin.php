@@ -49,19 +49,9 @@
                                 // Crée la variable qui va garder le mail
                                 $_SESSION["mail"] = $user[0]["useLogin"];
 
-                                // Si le GET à été entré
-                                if(isset($_SESSION["backToAllRecipes"]))
-                                {
-                                    // Redirige à la page de toutes les recettes avec un paramètre GET
-                                    header('location:allRecipes.php?msgConnexion=CCMU');
-                                }
-                                // Sinon si le GET à été entré
-                                else if(isset($_SESSION["backToIndex"]))
-                                {
-                                    // Redirige à la page d'index avec un paramètre GET
-                                    header('location:../../index.php?msgConnexion=CCMU');
-                                }
-
+                                // Redirige à la page d'index avec un paramètre GET
+                                header('location:../../../index.php?msgConnexion=CCMU');
+                                
                                 // Quitter la page
                                 exit;
                             }
@@ -80,19 +70,9 @@
                                 // Crée la variable qui va garder le mail
                                 $_SESSION["mail"] = $user[0]["useLogin"];
 
-                                // Si le GET à été entré
-                                if(isset($_SESSION["backToAllRecipes"]))
-                                {
-                                    // Redirige à la page de toutes les recettes avec un paramètre GET
-                                    header('location:allRecipes.php?msgConnexion=CCMA');
-                                }
-                                // Sinon si le GET à été entré
-                                else if(isset($_SESSION["backToIndex"]))
-                                {
-                                    // Redirige à la page d'index avec un paramètre GET
-                                    header('location:../../index.php?msgConnexion=CCMA');
-                                }
-
+                                // Redirige à la page d'index avec un paramètre GET
+                                header('location:../../../index.php?msgConnexion=CCMA');
+                                
                                 // Quitter la page
                                 exit;
                             }
@@ -100,19 +80,9 @@
                         // Sinon
                         else
                         {
-                            // Si le GET à été entré
-                            if(isset($_SESSION["backToAllRecipes"]))
-                            {
-                                // Redirige à la page index avec un paramètre GET
-                                header('location:allRecipes.php?msgConnexion=CCEM');
-                            }
-                            // Sinon si le GET à été entré
-                            else if(isset($_SESSION["backToIndex"]))
-                            {
-                                // Redirige à la page de toutes les recettes avec un paramètre GET
-                                header('location:../../index.php?msgConnexion=CCEM');
-                            }
-
+                            // Redirige à la page de toutes les recettes avec un paramètre GET
+                            header('location:../../../index.php?msgConnexion=CCEM');
+                            
                             // Quitter la page
                             exit;
                         }
@@ -120,18 +90,8 @@
                     // Sinon
                     else
                     {
-                        // Si le GET à été entré
-                        if(isset($_SESSION["backToAllRecipes"]))
-                        {
-                            // Redirige à la page de toutes les recettes avec un paramètre GET
-                            header('location:allRecipes.php?msgConnexion=CCEM');
-                        }
-                        // Sinon si le GET à été entré
-                        else if(isset($_SESSION["backToIndex"]))
-                        {
-                            // Redirige à la page d'index avec un paramètre GET
-                            header('location:../../index.php?msgConnexion=CCEM');
-                        }
+                        // Redirige à la page d'index avec un paramètre GET
+                        header('location:../../../index.php?msgConnexion=CCEM');
 
                         // Quitter la page
                         exit;
@@ -140,7 +100,7 @@
                 else
                 {
                     // Redirige à la page de toutes les recettes avec un paramètre GET
-                    header('location:login.php?msgConnexion=LEM');
+                    header('location:../view/login.php?msgConnexion=LEM');
 
                     // Quitter la page
                     exit;
@@ -149,7 +109,7 @@
             else
             {
                 // Redirige à la page de toutes les recettes avec un paramètre GET
-                header('location:login.php?msgConnexion=LPM');
+                header('location:../view/login.php?msgConnexion=LPM');
 
                 // Quitter la page
                 exit;
@@ -162,7 +122,7 @@
             session_destroy();
             
             // Redirige à la page d'index
-            header('location:../../index.php');
+            header('location:../../../index.php');
 
             // Quitter la page
             exit;
@@ -172,7 +132,7 @@
     else
     {
         // Redirige à la page d'index
-        header('location:../../index.php');
+        header('location:../../../index.php');
 
         // Quitter la page
         exit;

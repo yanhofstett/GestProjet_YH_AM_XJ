@@ -146,6 +146,16 @@ class Database
         return $prepareTabTemp[0];
     }
 
+    public function checkIsAthleteOrCoach($email)
+    {
+        $status = $this->getOneAthlete($email);
+        if (empty($status))
+        {
+            $status = $this->getOneCoach($email);
+        }
+        return $status;
+    }
+    
     /**
      * 
      */
@@ -253,7 +263,7 @@ class Database
     public function connexion($email)
     {
         // Requête SQL
-        $query = "SELECT usePseudo, useLogin, usePassword ,useAdministrator FROM t_user WHERE useLogin=:email";
+        $query = "SELECT athEmail, athPassword ,athIsAdministrator FROM t_user WHERE useLogin=:email";
 
         // Mettre dans un bind la valeur de l'email
         $binds['email']=['value'=>$email,'type'=>PDO::PARAM_STR];
