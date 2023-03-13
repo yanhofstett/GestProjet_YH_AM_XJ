@@ -14,6 +14,13 @@
         echo "Bienvenu Coach";
     }
 
+?>
+
+<a onclick="return matchByAthlete();"><img src="resources/images/match.png" alt="match"  width="20" height="20"></a>
+<a onclick="deleteChek()"><img src="resources/images/not_match.png" alt="match pas"  width="20" height="20"></a>
+
+<?php                               
+
     function coachDisplay($idCoachToDisplay)
     {
         //récupère toutes les info sur l'utilisateur
@@ -42,3 +49,16 @@
         var_dump($coachAlreadyMatch);
     }
 ?>
+
+
+
+<script>
+    //crée une fonction pour verifier si il veux vraiment suprimmer un produit
+    function matchByAthlete() 
+    {
+        <?php
+            $coachAlreadyMatch111 = Database::getInstance() -> getOneCoachAlreadyMatch($informationOfMe["idAthlete"],$coachToDisplay[0]["idCoach"]);
+            var_dump($coachAlreadyMatch111);
+        ?>
+    }
+</script> 
