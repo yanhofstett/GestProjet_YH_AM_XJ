@@ -1,6 +1,3 @@
-
-
-
 -- Database Section
 
 create database if not exists db_sport;

@@ -148,11 +148,20 @@ class Database
 
     public function checkIsAthleteOrCoach($email)
     {
+        //appelle la méthode pour récupérer les info sur l'athlete
         $status = $this->getOneAthlete($email);
+        //met la variable de session a 1 pour dire que c'est un athlete
+        $_SESSION["status"] = 1;
+
+        //regarde si la variable status est vide (donc que aucun athlete corresspond avec se mail)
         if (empty($status))
         {
+            //appelle la méthode pour récupérer les info sur le coach
             $status = $this->getOneCoach($email);
+            //met la variable de session a 2 pour dire que c'est un coach
+            $_SESSION["status"] = 2;
         }
+
         return $status;
     }
     
@@ -258,26 +267,37 @@ class Database
     }
     
     /**
-    * Fonction pour se connecter au site
-    *Paramètre : $email*/
-    public function connexion($email)
+     * 
+     */
+    public function findNextCoach($idCoachToDisplay)
     {
-        // Requête SQL
-        $query = "SELECT athEmail, athPassword ,athIsAdministrator FROM t_user WHERE useLogin=:email";
+        $query = "SELECT idCoach,coaName,coaSurname,coaEmail,coaPassword,coaPhone,coaExperience,coaImage FROM t_coach WHERE idCoach = :idNextCoach";
+        
+        $binds["idNextCoach"]=["value"=>$idCoachToDisplay, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
 
-        // Mettre dans un bind la valeur de l'email
-        $binds['email']=['value'=>$email,'type'=>PDO::PARAM_STR];
-
-        // Executer avec une requête préparer la requête et avec le bind
-        $prepareTemp = $this->queryPrepareExecute($query, $binds);
-
-        // Retourner en tableau associatif
         $prepareTabTemp = $this->formatData($prepareTemp);
 
-        // Retourner le tableau
         return $prepareTabTemp;
     }
+    
+    /**
+     * 
+     */
+    public function getOneCoachAlreadyMatch($idAthlete,$idCoach)
+    {
+        $query = "SELECT fkAthlete, fkCoach, athEmail, coaEmail FROM t_select JOIN t_coach ON idCoach=fkCoach JOIN t_athlete ON idAthlete=fkAthlete WHERE fkAthlete = :idAthlete && fkCoach = :idCoach";
 
+        $binds["idAthlete"]=["value"=>$idAthlete, "type"=>PDO::PARAM_INT];
+        $binds["idCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp;
+    }
 }
 
 ?>
