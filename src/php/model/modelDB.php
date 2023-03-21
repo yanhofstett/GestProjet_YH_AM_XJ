@@ -298,6 +298,19 @@ class Database
 
         return $prepareTabTemp;
     }
+
+    /**
+     * 
+     */
+    public function selectCoachByAthlete($idAthlete,$idCoach)
+    {
+        $query="INSERT INTO t_select (fkAthlete, fkCoach) VALUES (:idAthlete, :idCoach)";
+
+        $binds["idAthlete"]=["value"=>$idAthlete, "type"=>PDO::PARAM_STR];
+        $binds["idCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
+
+        $this->queryPrepareExecute($query, $binds);
+    }
 }
 
 

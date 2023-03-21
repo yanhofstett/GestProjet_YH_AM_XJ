@@ -1,64 +1,54 @@
 <?php
+    //inclu la page qui permet de choisire la prochaine personne affiché
+    include("src/php/controller/NextChoiceMeeting.php");
+
     if (isset($_SESSION["isAthlete"]))
     {
-        //variable qui regarde quelle coach est le prochain a se faire afficher
-        $idCoachToDisplay=0;
+        //regarde que la variable n'a pas encore été créé
+        if(!isset($idCoachToDisplay))
+        {
+            //variable qui regarde quelle coach est le prochain a se faire afficher
+            $idCoachToDisplay=0;
+        }
 
         echo "Bienvenu Athlete";
 
         //appele la méthode pour trouver le coach a afficher
-        coachDisplay($idCoachToDisplay);
+        $idCoachMatch = NextChoiceMeeting::getInstance() -> coachDisplay($idCoachToDisplay);
     }
     else if (isset($_SESSION["isCoach"]))
     {
         echo "Bienvenu Coach";
     }
-
-?>
-
-<a onclick="return matchByAthlete();"><img src="resources/images/match.png" alt="match"  width="20" height="20"></a>
-<a onclick="deleteChek()"><img src="resources/images/not_match.png" alt="match pas"  width="20" height="20"></a>
-
-<?php                               
-
-    function coachDisplay($idCoachToDisplay)
+    
+    //regarde si c'est un match ou non et si l'utilisateur qui fait le match est un Athlete ou un Coach
+    if (isset($_GET["acction"]))
     {
-        //récupère toutes les info sur l'utilisateur
-        $informationOfMe = Database::getInstance() -> getOneAthlete($_SESSION["email"]);
-
-        do
+        //regarde si c'est un athlete qui a match
+        if ($_GET["acction"] == "machByAthlete")
         {
-            //ajoute 1 a l'id du coach a afficher
+            //récupère toutes les info sur l'Athlete qui a fait le match
+            $me = Database::getInstance() -> getOneAthlete($_SESSION["email"]);
+            
+            //ajoute la séléction du coach
+            Database::getInstance() -> selectCoachByAthlete($me["idAthlete"], $idCoachMatch);
+
+            //ajoute 1 au coach a afficher
             $idCoachToDisplay++;
-
-            //le prochain coach qui va etre afficher
-            $coachToDisplay = Database::getInstance() -> findNextCoach($idCoachToDisplay);
-
-            //regarde que le coach a été trouvé
-            if (!empty($coachToDisplay))
-            {
-                //regarde si le coach est déjà match (null si il y a pas de match corresspondant a cela)
-                $coachAlreadyMatch = Database::getInstance() -> getOneCoachAlreadyMatch($informationOfMe["idAthlete"],$coachToDisplay[0]["idCoach"]);
-            }
         }
-        //recommence tant que la variable "coachToDisplay" est vide et que "coachAlreadyMatch" n'est pas null
-        while(empty($coachToDisplay) || !empty($coachAlreadyMatch));
+        //regarde si c'est un athlete qui n'a pas match
+        else if ($_GET["acction"] == "notMachByAthlete")
+        {
+            //ajoute 1 au coach a afficher
+            $idCoachToDisplay++;
+        }
 
-        echo "\n\n\n".$idCoachToDisplay."\n\n\n";
-        var_dump($coachToDisplay);
-        var_dump($coachAlreadyMatch);
+        //redirige ver la page sans l'acction
+        header("Location:../../");
+        exit;
     }
+
 ?>
 
-
-
-<script>
-    //crée une fonction pour verifier si il veux vraiment suprimmer un produit
-    function matchByAthlete() 
-    {
-        <?php
-            $coachAlreadyMatch111 = Database::getInstance() -> getOneCoachAlreadyMatch($informationOfMe["idAthlete"],$coachToDisplay[0]["idCoach"]);
-            var_dump($coachAlreadyMatch111);
-        ?>
-    }
-</script> 
+<a href="./index.php?page=meet&acction=machByAthlete"><img src="resources/images/match.png" alt="match"  width="20" height="20"></a>
+<a href="./index.php?page=meet&acction=notMachByAthlete"><img src="resources/images/not_match.png" alt="match pas"  width="20" height="20"></a>

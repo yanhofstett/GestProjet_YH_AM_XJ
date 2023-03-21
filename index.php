@@ -28,11 +28,12 @@ Description : page qui permet de rediriger ver les différentes page de notre si
     session_destroy();
     $_SESSION["isConnected"]=1;
     $_SESSION["isAthlete"]=1;
-    $_SESSION["email"]="hfhu9hff";
+    $_SESSION["email"]="hfhu9hff@gmail.com";
     $_SESSION["adminConnected"]=1;
-    //$_SESSION["email"]="hfhu9hgg";
+    //$_SESSION["email"]="hfhu9hgg@gmail.com";
     //$_SESSION["isCoach"]=1;
-    //$_SESSION["email"]="uzguzg1";
+    //$_SESSION["email"]="uzguzg1@gmail.com";
+    //$_SESSION["email"]="bsdjuusdu@gmail.com";
 
     //regarde si l'utilisateur n'est pas connecter pour le rediriger ver la page de connection (car pour visité le site on doit être connecté)
     if(!isset($_SESSION["isConnected"]))
