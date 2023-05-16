@@ -24,7 +24,7 @@
         }
         else
         {
-            echo "Merci de mettre un nom et une question";
+            echo "Merci de mettre un message";
         }
     }
     else

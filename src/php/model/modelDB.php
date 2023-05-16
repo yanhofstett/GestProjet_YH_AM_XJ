@@ -285,6 +285,23 @@ class Database
     /**
      * 
      */
+    public function findNextAthlete($idMe, $idAthleteToDisplay)
+    {
+        $query = "SELECT `idAthlete`,`athName`,`athSurname`,`athEmail`,`athPassword`,`athPhone`,`athTown`,`athNPA` FROM `t_athlete` JOIN t_select ON `fkAthlete`=`idAthlete` WHERE fkCoach = :idMe && `validateCoach` = 0 && `fkAthlete` = :idAthleteToDisplay ORDER BY fkAthlete ASC LIMIT 1";
+        
+        $binds["idMe"]=["value"=>$idMe, "type"=>PDO::PARAM_INT];
+        $binds["idAthleteToDisplay"]=["value"=>$idAthleteToDisplay, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp;
+    }
+
+    /**
+     * 
+     */
     public function getOneCoachAlreadyMatch($idAthlete,$idCoach)
     {
         $query = "SELECT fkAthlete, fkCoach, athEmail, coaEmail FROM t_select JOIN t_coach ON idCoach=fkCoach JOIN t_athlete ON idAthlete=fkAthlete WHERE fkAthlete = :idAthlete && fkCoach = :idCoach";
@@ -306,9 +323,123 @@ class Database
     {
         $query="INSERT INTO t_select (fkAthlete, fkCoach) VALUES (:idAthlete, :idCoach)";
 
-        $binds["idAthlete"]=["value"=>$idAthlete, "type"=>PDO::PARAM_STR];
+        $binds["idAthlete"]=["value"=>$idAthlete, "type"=>PDO::PARAM_INT];
         $binds["idCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
 
+        $this->queryPrepareExecute($query, $binds);
+    }
+    
+    /**
+     * 
+     */
+    public function getMaxCoachInDB()
+    {
+        $query = "SELECT `idCoach` FROM `t_coach` ORDER BY `idCoach` DESC LIMIT 1";
+        $prepareTemp = $this->querySimpleExecute($query);
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp[0];
+    } 
+
+    /**
+     * 
+     */
+    public function getFirstAthleteMatchMeInDB($idCoach)
+    {
+        $query = "SELECT `fkAthlete` FROM `t_select` WHERE `fkCoach` = :fkCoach ORDER BY fkAthlete ASC LIMIT 1";
+
+        $binds["fkCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp;
+    } 
+
+    /**
+     * 
+     */
+    public function getNumberAthleteMatcheMehInDB($idCoach,$paramValid)
+    {
+        $query = "SELECT COUNT(fkAthlete) FROM t_select WHERE fkCoach = :fkCoach && validateCoach = :matchOrNot";
+            
+        $binds["fkCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
+        $binds["matchOrNot"]=["value"=>$paramValid, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp[0];
+    }
+     
+     /**
+     * 
+     */
+    public function getNumberMatcheMehInDB($idCoach)
+    {
+        $query = "SELECT COUNT(fkAthlete) FROM t_select WHERE fkCoach = :fkCoach";
+            
+        $binds["fkCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp[0];
+    }
+
+    /**
+     * 
+     */
+    public function getNumberMatchByAthlete($idAthlete)
+    {
+        $query = "SELECT COUNT(fkCoach) FROM `t_select` WHERE fkAthlete = :idAthlete";
+        
+        $binds["idAthlete"]=["value"=>$idAthlete, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp[0];
+    }
+
+    /**
+     * 
+     */
+    public function valideMatch($idAthlete, $idCoach)
+    {
+        $query = "UPDATE t_select SET `validateCoach` = 1 WHERE `fkAthlete` = :fkAthlete && `fkCoach` = :fkCoach";
+        
+        $binds["fkAthlete"]=["value"=>$idAthlete, "type"=>PDO::PARAM_INT];
+        $binds["fkCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp;
+    }
+    
+    /**
+     * permet de modifier les information de l'utilisateur
+     */
+    public function modifyUser($id,$name,$surname,$email,$phone,$street,$town,$npa,$password)
+    {
+        $query="UPDATE `t_athlete` SET athName = :athName, athSurname = :athSurname , athEmail = :athEmail , athPassword = :athPassword , athPhone = :athPhone , athStreet = :athStreet , athTown = :athTown , athNPA = :athNPA  WHERE idAthlete = :idAthlete";
+
+        $binds["idAthlete"]=["value"=>$id, "type"=>PDO::PARAM_INT];
+        $binds["athName"]=["value"=>$name, "type"=>PDO::PARAM_STR];
+        $binds["athSurname"]=["value"=>$surname, "type"=>PDO::PARAM_STR];
+        $binds["athEmail"]=["value"=>$email, "type"=>PDO::PARAM_STR];
+        $binds["athPassword"]=["value"=>$password, "type"=>PDO::PARAM_STR];
+        $binds["athPhone"]=["value"=>$phone, "type"=>PDO::PARAM_STR];
+        $binds["athStreet"]=["value"=>$street, "type"=>PDO::PARAM_STR];
+        $binds["athTown"]=["value"=>$town, "type"=>PDO::PARAM_STR];
+        $binds["athNPA"]=["value"=>$npa, "type"=>PDO::PARAM_STR];
+        
         $this->queryPrepareExecute($query, $binds);
     }
 }

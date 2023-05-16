@@ -41,7 +41,7 @@ create table if not exists t_coach (
 
 create table if not exists t_message (
      idMessage INT(11) not null AUTO_INCREMENT,
-     mesMessage varchar(400) not null,
+     mesMessage varchar(1000) not null,
      fkCoach INT(11) not null,
      fkAthlete INT(11) not null,
      PRIMARY KEY (idMessage),

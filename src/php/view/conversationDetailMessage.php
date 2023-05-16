@@ -4,7 +4,14 @@
  * Date : 16.12.2022
  * Description : permet d'afficher une conversation entre un athlete et un coach qui on match ensemble
  */
-
+?>
+    <!--crée un bouton pour revenir en arriere-->
+    <form method="post" action="./index.php?page=conv">
+        <input type="submit" name="return" value="retour">
+    </form>
+    
+    <br><br>
+<?php
     //regarde si c'est un athlete (car l'ordre d'appelle de méthode change en fonction des 2 utilisateur et le nom de l'id change également)
     if (isset($_SESSION["isAthlete"]))
     {
@@ -61,7 +68,7 @@
                     <!--affiche le message a droite de la page-->
                     <p style="text-align: right; margin-right: 400px;"><?=$message["mesMessage"]?>
                         <a href="src/php/controller/deletMessage.php?id=<?=$message["idMessage"]?>" onclick="return deleteChek()"><img src="resources/images/supprimer_logo.png" alt="supprimer icone"  width="20" height="20"></a>
-                    </p>                             
+                    </p>     
                 <?php
             }
             else
@@ -112,14 +119,81 @@
                 ?>
 
                 <!--met un textBox pour le message-->
-                <textarea class="form-control" id="MessageFromUser" name="MessageFromUser" placeholder="Mon message" required></textarea>
-                <label for="floatingInput">Message</label>
-            </div>
+                <script type="text/javascript">
+                        /*
+                        *Fonction : Pour le nombre de caractère*
+                        *Paramètre : cara, nbrcara*/
+                        function nbrCara(cara,nbrcara)
+                        {
+                            /*Variable : Limite de caractère*/
+                            var limit = 1000;
 
-            <input type="submit" name="btnSend" value="Envoyer">
+                            /*Variable : Le text entré*/
+                            var myText = document.getElementById(myText);
+
+                            /*Variable : la longueur actuelle*/
+                            var nombre = document.getElementById(cara).value.length
+
+                            // Défénir la limite
+                            document.getElementById(nbrcara).innerHTML = nombre + "/" + limit;
+
+                            // Si la longueur actuelle est plus grande que la moitier de la limite
+                            if(nombre > limit/2)
+                            {
+                                // Change la couleur du nombre
+                                document.getElementById("nbrcara").style.color = "orange";
+
+                                // Fais la transition
+                                document.getElementById("nbrcara").style.transition = "color 2s ease";
+                            }
+                            // Si la longueur actuelle est plus petite que la moitier de la limite
+                            else if(nombre < limit/2)
+                            {
+                                // Change la couleur du nombre
+                                document.getElementById("nbrcara").style.color = "#09df98";
+
+                                // Fais la transition
+                                document.getElementById("nbrcara").style.transition = "color 2s ease";
+                            }
+                            // Si la longueur actuelle est plus grande que 40 au dessus de la moitier de la limite limite
+                            else if(nombre > limit/2 +40)
+                            {
+                                // Change la couleur du nombre
+                                document.getElementById("nbrcara").style.color = "red";
+
+                                // Fais la transition
+                                document.getElementById("nbrcara").style.transition = "color 2s ease";
+                            }
+                            // Si la longueur actuelle est égal à la limite
+                            else if(nombre == limit)
+                            {
+                                // Change la couleur du nombre
+                                document.getElementById("nbrcara").style.color = "rgb(138, 42, 255)";
+
+                                // Fais la transition
+                                document.getElementById("nbrcara").style.transition = "color 2s ease";
+                            }
+                            // Si la longueur actuelle est plus petite que 10
+                            else if(nombre < 10)
+                            {
+                                // Change la couleur du nombre
+                                document.getElementById("nbrcara").style.color = "rgb(255, 255, 0)";
+
+                                // Fais la transition
+                                document.getElementById("nbrcara").style.transition = "color 2s ease";
+                            }
+                        }
+                    </script>
+                    <textarea type="hidden" name="MessageFromUser" class="textArea" id="myText" rows="5" style=" width: 50%; " maxlength="1000" placeholder="message"
+                        onkeyup="nbrCara('myText','nbrcara');"onkeydown="nbrCara('myText','nbrcara');" onmouseout="nbrCara('myText','nbrcara');"
+                        required></textarea>
+                        <p>Caractères restants : <span id="counter"></span></p>
+                    <p class="limitCara" id="nbrcara">0/1000</p>
+                    
+                    <input type="submit" name="btnSend" value="Envoyer">
+            </div>
         </form>
     </div>
-
 
 <script>
     //crée une fonction pour verifier si il veux vraiment suprimmer un produit

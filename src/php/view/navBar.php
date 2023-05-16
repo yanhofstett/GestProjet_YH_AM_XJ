@@ -30,7 +30,7 @@
             </a>
             <ul class="dropdown-menu text-small">
                 <!--ajoute les options de la liste déroulante-->
-                <li><a class="dropdown-item" href="#">Profil</a></li>
+                <li><a class="dropdown-item" href="./index.php?page=profile">Profil</a></li>
                 <li><a class="dropdown-item" href="./index.php?page=conv">Conversation avec les coaches</a></li>
                 
                 <!--met un trait pour séparer les option-->

@@ -25,11 +25,11 @@ Description : page qui permet de rediriger ver les différentes page de notre si
     include 'src/php/controller/config.php';
     require "src/php/model/modelDB.php";
 
-    session_destroy();
+    //session_destroy();
     $_SESSION["isConnected"]=1;
     $_SESSION["isAthlete"]=1;
     $_SESSION["email"]="hfhu9hff@gmail.com";
-    $_SESSION["adminConnected"]=1;
+    //$_SESSION["adminConnected"]=1;
     //$_SESSION["email"]="hfhu9hgg@gmail.com";
     //$_SESSION["isCoach"]=1;
     //$_SESSION["email"]="uzguzg1@gmail.com";
@@ -59,7 +59,6 @@ Description : page qui permet de rediriger ver les différentes page de notre si
     
     //affiche la barre de navigation
     include("src/php/view/navBar.php");
-
 
 #region tout les messages quand on a effectué quelque chose sur le site
     #region messages dans l'index après avoir modifiés
@@ -380,6 +379,9 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         case "convDetail":
             $pageChose = "conversationDetailMessage";
             break;
+        case "profile":
+            $pageChose = "profile";
+            break;
         default:
             $pageChose = "error";
             break;
@@ -390,6 +392,5 @@ Description : page qui permet de rediriger ver les différentes page de notre si
 
     //affiche le footer
     include("src/html/footer.html");
-
     ?>
 </html>
