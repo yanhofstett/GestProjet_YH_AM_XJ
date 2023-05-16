@@ -25,15 +25,6 @@ Description : page qui permet de rediriger ver les différentes page de notre si
     include 'src/php/controller/config.php';
     require "src/php/model/modelDB.php";
 
-    session_destroy();
-    $_SESSION["isConnected"]=1;
-    $_SESSION["isAthlete"]=1;
-    $_SESSION["email"]="hfhu9hff";
-    $_SESSION["adminConnected"]=1;
-    //$_SESSION["email"]="hfhu9hgg";
-    //$_SESSION["isCoach"]=1;
-    //$_SESSION["email"]="uzguzg1";
-
     //regarde si l'utilisateur n'est pas connecter pour le rediriger ver la page de connection (car pour visité le site on doit être connecté)
     if(!isset($_SESSION["isConnected"]))
     {
@@ -71,47 +62,12 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         {
             // Afficher le message que la modification a réussi depuis le config.php
             echo MODIFY_CORRECT_MESSAGE;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 2600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php   
         }
         // Sinon si le GET est égal à MEM
         else if($_GET['msgModify']=='MEM')
         {
             // Affiche le message d'erreur et que la modification n'a pas pu aboutir depuis le config.php
-            echo MODIFY_ERROR_MESSAGE;
-            
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 2600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php      
+            echo MODIFY_ERROR_MESSAGE;      
         }
     }
     #endregion
@@ -125,47 +81,13 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         if($_GET['msgDelete']=='DCM')
         {
             // Afficher le message que le produit à été supprimer depuis le config.php
-            echo DELETE_CORRECT_MESSAGE;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 2600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php     
+            echo DELETE_CORRECT_MESSAGE; 
         }
         // Sinon si le GET est égal à DEM
         else if($_GET['msgDelete']=='DEM')
         {
             // Afficher le message que le produit à été supprimer depuis le config.php
             echo DELETE_ERROR_MESSAGE;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 2600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php     
         }
     }
     #endregion
@@ -178,47 +100,13 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         if($_GET['msgAdded']=='ACM')
         {
             // Afficher le message que le produit à bien été ajouté depuis le config.php
-            echo ADDED_CORRECT_MESSAGE;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 2600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php     
+            echo ADDED_CORRECT_MESSAGE;  
         }
         // Sinon si le GET est égal à AEM
         else if($_GET['msgAdded']=='AEM')
         {
             // Afficher l'erreur d'ajout de produit depuis le config.php
-            echo ADDED_ERROR_MESSAGE;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 2600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php     
+            echo ADDED_ERROR_MESSAGE;   
         }
     }
     #endregion
@@ -235,72 +123,18 @@ Description : page qui permet de rediriger ver les différentes page de notre si
             echo CONNEXION_CORRECT_MESSAGE_USER;
 
             // Crée la variable de session pour dire que c'est un user seulement
-            $_SESSION["userConnected"] = 1;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 2600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php     
+            $_SESSION["userConnected"] = 1;  
         }
         // Sinon si le GET est égal à CCMA
         else if($_GET['msgConnexion']=='CCMA')
         {
             // Afficher le message de connexion pour un admin depuis le config.php
-            echo CONNEXION_CORRECT_MESSAGE_ADMIN;
-
-            // Crée la variable de session pour dire que c'est un administrateur seulement
-            $_SESSION["adminConnected"] = 1;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 2600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php     
+            echo CONNEXION_CORRECT_MESSAGE_ADMIN;  
         }
         else if($_GET['msgConnexion']=='COM')
         {
             // Afficher le message de connexion pour un admin depuis le config.php
-            echo CONNEXION_ONLY_MESSAGE;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 2600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php     
+            echo CONNEXION_ONLY_MESSAGE;   
         }
     }
     #endregion
@@ -313,24 +147,7 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         if($_GET['msgConnexion']=='CCEM')
         {
             // Afficher l'erreur que la connexion a échoué depuis le config.php
-            echo CONNECTOR_CONNEXION_ERROR_MESSAGE;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 4600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php     
+            echo CONNECTOR_CONNEXION_ERROR_MESSAGE;   
         }
     }
     #endregion
@@ -343,24 +160,7 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         if($_GET['msgConnected']=='IAI')
         {
             // Afficher l'erreur que la connexion a échoué depuis le config.php
-            echo ISNT_ABLE_INFO;
-            ?>
-            <!-- Script Javascript -->
-            <script>
-                //Crée un timeout qui va s'écouler avant de faire myFunction
-                setTimeout(myFunction, 4600);
-
-                // Création d'une fonction
-                function myFunction()
-                {    
-                    // Redirige vers la page d'index
-                    location.href="index.php";
-                }
-            // Fin du script
-            </script>
-
-            <!-- Ouvre le php -->
-            <?php     
+            echo ISNT_ABLE_INFO; 
         }
     }
     #endregion
@@ -378,6 +178,9 @@ Description : page qui permet de rediriger ver les différentes page de notre si
             break;
         case "convDetail":
             $pageChose = "conversationDetailMessage";
+            break;
+        case "contact":
+            $pageChose = "contact";
             break;
         default:
             $pageChose = "error";

@@ -4,41 +4,24 @@
         //variable qui regarde quelle coach est le prochain a se faire afficher
         $idCoachToDisplay=0;
 
-        echo "Bienvenu Athlete";
+        echo "<br>Bienvenu.e " . $_SESSION["Surname"] . " vous êtes un athlète";
 
         //appele la méthode pour trouver le coach a afficher
         coachDisplay($idCoachToDisplay);
     }
     else if (isset($_SESSION["isCoach"]))
     {
-        echo "Bienvenu Coach";
+        echo "<br>Bienvenu.e " . $_SESSION["Surname"] . " vous êtes un Coach";
+
+
     }
 
-    function coachDisplay($idCoachToDisplay)
-    {
-        //récupère toutes les info sur l'utilisateur
-        $informationOfMe = Database::getInstance() -> getOneAthlete($_SESSION["email"]);
+//récupère toutes les info sur l'utilisateur
+$informationOfMe = Database::getInstance() -> getOneCoach($_SESSION["email"]);
+ 
 
-        do
-        {
-            //ajoute 1 a l'id du coach a afficher
-            $idCoachToDisplay++;
+var_dump($informationOfMe["coaImage"]);
 
-            //le prochain coach qui va etre afficher
-            $coachToDisplay = Database::getInstance() -> findNextCoach($idCoachToDisplay);
-
-            //regarde que le coach a été trouvé
-            if (!empty($coachToDisplay))
-            {
-                //regarde si le coach est déjà match (null si il y a pas de match corresspondant a cela)
-                $coachAlreadyMatch = Database::getInstance() -> getOneCoachAlreadyMatch($informationOfMe["idAthlete"],$coachToDisplay[0]["idCoach"]);
-            }
-        }
-        //recommence tant que la variable "coachToDisplay" est vide et que "coachAlreadyMatch" n'est pas null
-        while(empty($coachToDisplay) || !empty($coachAlreadyMatch));
-
-        echo "\n\n\n".$idCoachToDisplay."\n\n\n";
-        var_dump($coachToDisplay);
-        var_dump($coachAlreadyMatch);
-    }
+// Montrer le détail : L'image du coach
+echo "<p>Photo de profil : <img class='catName' height='auto' style='max-height: 40px;' width='auto' src='userContent/images/" . $informationOfMe["coaImage"] . "'><br><br></img></p>";
 ?>

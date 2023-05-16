@@ -20,7 +20,7 @@
             
             <li><a href="#" class="nav-link px-2 link-secondary">#</a></li>
             
-            <li><a href="#" class="nav-link px-2 link-secondary">#</a></li>
+            <li><a href="./index.php?page=contact" class="nav-link px-2 link-secondary">Nous contacter</a></li>
             
             </ul>
             

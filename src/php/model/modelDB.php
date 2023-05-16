@@ -65,37 +65,44 @@ class Database
         return $array["password"];
     }
 
-    /**
-     * TODO: à compléter
-     */
+        /**
+    * Fonction pour l'execution simplifier d'une requête sans where
+    *Paramètre : $query*/
     private function querySimpleExecute($query)
     {
         // Utilisation de query pour effectuer une requête
         return $this->connector->query($query);
     }
 
+    
     /**
-     * TODO: à compléter
-     */
-    private function queryPrepareExecute($query, $binds)
+     * Fonction pour l'execution et le "bindage" préparer d'une requête avec where et pour éviter les injections
+     *Paramètres : $queryString, $binds*/
+    private function queryPrepareExecute($queryString, $binds)
     {
+        // Essayer
         try
         {
-            // Utilisation de prepare, bindValue et execute
-            $req = $this->connector->prepare($query);
+            // Mettre le paramètre qui sera préparer dans la variable
+            $pdoStatment = $this->connector->prepare($queryString);
 
-            foreach($binds as $tableKey=>$recipe)
+            // Crée une boucle foreach pour retourner les elements du tableau associatif
+            foreach($binds as $key=>$element)
             {
-                //associe les valeurs dans un tableau associatife
-                $req->bindValue(":$tableKey", $recipe['value'], $recipe['type']);
+                // Placer les valeurs dans bindValue
+                $pdoStatment->bindValue(":$key",$element["value"], $element["type"]);
             }
-            
-            $req->execute();
-            return $req;
+            // Executer la variable et le bindValue
+            $pdoStatment->execute();
+
+            // Demande le retour de la variable qui a éxecuté
+            return $pdoStatment;
         }
-        catch (PDOException $e)
+        // Si a échoué crée l'exeption dans la variable "$e"
+        catch(PDOException $e)
         {
-            die('Erreur : ' . $e->getMessage());
+            // Ecrire l'erreur
+            die("Erreur :" . $e->getMessage());
         }
     }
 
@@ -109,22 +116,43 @@ class Database
     }
 
     /**
+    * Permet de récupérer touts les informations sur les utilisateurs déjà créer dans la db
+    **/
+    public function getAllUsers()
+    {
+        // Requête SQL*
+        $query = "SELECT `idAthlete`, `athName`, `athSurname`, `athEmail`, `athPassword`, `athPhone`, `athTown`, `athNPA`, `athIsAdministrator` FROM `t_athlete`UNION SELECT `idCoach`, `coaName`, `coaSurname`, `coaEmail`, `coaPassword`, `coaPhone`, `coaExperience`, `coaImage`, `coaIsAdministrator` FROM `t_coach`";
+
+
+        //utiliser ca cette fois car pas de WHERE donc faut pas utiliser queryPrepareExecute
+        $temp = $this->querySimpleExecute($query);
+
+        //appeler la méthode pour avoir le résultat sous forme de tableau associatif 
+        $tabTemp = $this->formatData($temp);
+
+        // Retourner le tableau
+        return $tabTemp;
+    }
+
+    /**
      * 
      */
     public function getOneAthlete($email)
     {
         //récupére l'id de l'utilisateur, le login, l'email, le mot de passe, si oui ou non il est admin
-        $query = "SELECT idAthlete, athName, athSurname, athEmail, athPassword, athPhone, athStreet, athTown, athNPA FROM t_athlete WHERE athEmail = :athEmail";
+        $query = "SELECT idAthlete, athName, athSurname, athEmail, athPassword, athPhone, athTown, athNPA FROM t_athlete WHERE athEmail = :athEmail";
+
         //avoir la requête sql pour un utilisateur (utilisation de l'emial de l'utilisateur)
         $binds['athEmail']=['value'=>$email,'type'=>PDO::PARAM_STR];
 
         // appeler la méthode pour executer la requête
         $prepareTemp = $this->queryPrepareExecute($query,$binds);
+        
         //appeler la méthode pour avoir le résultat sous forme de tableau associatif
         $prepareTabTemp = $this->formatData($prepareTemp);
 
         //retourn le tableau associatife du login
-        return $prepareTabTemp[0];
+        return $prepareTabTemp;
     }
 
     /**
@@ -145,26 +173,9 @@ class Database
         //retourn le tableau associatife du login
         return $prepareTabTemp[0];
     }
-
-    public function checkIsAthleteOrCoach($email)
-    {
-        //appelle la méthode pour récupérer les info sur l'athlete
-        $status = $this->getOneAthlete($email);
-        //met la variable de session a 1 pour dire que c'est un athlete
-        $_SESSION["status"] = 1;
-
-        //regarde si la variable status est vide (donc que aucun athlete corresspond avec se mail)
-        if (empty($status))
-        {
-            //appelle la méthode pour récupérer les info sur le coach
-            $status = $this->getOneCoach($email);
-            //met la variable de session a 2 pour dire que c'est un coach
-            $_SESSION["status"] = 2;
-        }
-
-        return $status;
-    }
     
+ 
+
     /**
      * 
      */
@@ -298,6 +309,113 @@ class Database
 
         return $prepareTabTemp;
     }
-}
 
+        /**
+    * Fonction pour se connecter au site en tant qu'coach
+    *Paramètre : $email*/
+    public function connexionCoach($email)
+    {
+        // Requête SQL
+        $query = "SELECT coaName, coaSurname, coaEmail, coaPassword, coaPhone, coaExperience, coaImage, coaIsAdministrator FROM t_coach WHERE coaEmail=:email";
+
+        // Mettre dans un bind la valeur de l'email
+        $binds['email']=['value'=>$email,'type'=>PDO::PARAM_STR];
+
+        // Executer avec une requête préparer la requête et avec le bind
+        $prepareTemp = $this->queryPrepareExecute($query, $binds);
+
+        // Retourner en tableau associatif
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        // Retourner le tableau
+        return $prepareTabTemp;
+    }
+
+    /**
+    * Fonction pour se connecter au site en tant qu'athlete
+    *Paramètre : $email*/
+    public function connexionAthlete($email)
+    {
+        // Requête SQL
+        $query = "SELECT athName, athSurname, athEmail, athPassword, athPhone, athTown, athNPA, athIsAdministrator FROM t_athlete WHERE athEmail=:email";
+
+        // Mettre dans un bind la valeur de l'email
+        $binds['email']=['value'=>$email,'type'=>PDO::PARAM_STR];
+
+        // Executer avec une requête préparer la requête et avec le bind
+        $prepareTemp = $this->queryPrepareExecute($query, $binds);
+
+        // Retourner en tableau associatif
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        // Retourner le tableau
+        return $prepareTabTemp;
+    }
+
+ /**
+    * Fonction pour crée un compte de Athlete sur le site
+    *Paramètre : $name, $surname, $email, $password, $phone, $town, $npa*/
+    public function registerAthlete($name, $surname, $email, $password, $phone, $town, $npa)
+    {
+        // Requête SQL
+        $query = "INSERT INTO `t_athlete`(`athName`, `athSurname`, `athEmail`, `athPassword`, `athPhone`, `athTown`, `athNPA`) VALUES (:athName, :athSurname, :athEmail, :athPassword, :athPhone, :athTown, :athNPA)";
+
+        // Mettre dans un bind la valeur du nom
+        $binds['athName']=['value'=>$name,'type'=>PDO::PARAM_STR];     
+
+        // Mettre dans un bind la valeur du prénom
+        $binds['athSurname']=['value'=>$surname,'type'=>PDO::PARAM_STR];
+
+        // Mettre dans un bind la valeur de la l'email
+        $binds['athEmail']=['value'=>$email,'type'=>PDO::PARAM_STR];
+
+        // Mettre dans un bind la valeur du mot de passe
+        $binds['athPassword']=['value'=>$password,'type'=>PDO::PARAM_STR];
+    
+        // Mettre dans un bind la valeur du téléphone
+        $binds['athPhone']=['value'=>$phone,'type'=>PDO::PARAM_STR];
+
+        // Mettre dans un bind la valeur de la ville
+        $binds['athTown']=['value'=>$town,'type'=>PDO::PARAM_STR];
+
+        // Mettre dans un bind la valeur du code postal
+        $binds['athNPA']=['value'=>$npa,'type'=>PDO::PARAM_STR];
+
+        // Executer avec une requête préparer la requête et avec le bind
+        $this->queryPrepareExecute($query, $binds);
+    }   
+    
+    /**
+    * Fonction pour crée un compte de coach sur le site
+    *Paramètre : $name, $surname, $email, $password, $phone, $experience, $image*/
+    public function registerCoach($name, $surname, $email, $password, $phone, $experience, $image)
+    {
+        // Requête SQL
+        $query = "INSERT INTO `t_coach`(`coaName`, `coaSurname`, `coaEmail`, `coaPassword`, `coaPhone`, `coaExperience`, `coaImage`) VALUES (:coaName, :coaSurname, :coaEmail, :coaPassword, :coaPhone, :coaExperience, :coaImage)";
+
+        // Mettre dans un bind la valeur du nom
+        $binds['coaName']=['value'=>$name,'type'=>PDO::PARAM_STR];     
+
+        // Mettre dans un bind la valeur du prénom
+        $binds['coaSurname']=['value'=>$surname,'type'=>PDO::PARAM_STR];
+
+        // Mettre dans un bind la valeur de la l'email
+        $binds['coaEmail']=['value'=>$email,'type'=>PDO::PARAM_STR];
+
+        // Mettre dans un bind la valeur du mot de passe
+        $binds['coaPassword']=['value'=>$password,'type'=>PDO::PARAM_STR];
+    
+        // Mettre dans un bind la valeur du téléphone
+        $binds['coaPhone']=['value'=>$phone,'type'=>PDO::PARAM_STR];
+
+        // Mettre dans un bind la valeur de la ville
+        $binds['coaExperience']=['value'=>$experience,'type'=>PDO::PARAM_STR];
+
+        // Mettre dans un bind la valeur du code postal
+        $binds['coaImage']=['value'=>$image,'type'=>PDO::PARAM_STR];
+
+        // Executer avec une requête préparer la requête et avec le bind
+        $this->queryPrepareExecute($query, $binds);
+    }  
+}
 ?>
