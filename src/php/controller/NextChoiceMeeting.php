@@ -86,24 +86,27 @@ class NextChoiceMeeting
     function AthleteMatcheWithMeToDisplay($idAthleteToDisplay)
     {
         //récupère toutes les info sur l'utilisateur
-        $informationOfMe = Database::getInstance() -> getOneCoach($_SESSION["email"]);
+        $informationOfMeCoach = Database::getInstance() -> getOneCoach($_SESSION["email"]);
 
         //récupère le nombre max d'athlete possible d'afficher
-        $numberAthleteMatchMe = Database::getInstance() -> getNumberAthleteMatcheMehInDB($informationOfMe["idCoach"],0);
+        $numberAthleteMatchMe = Database::getInstance() -> getNumberAthleteMatcheMehInDB($informationOfMeCoach["idCoach"],0);
         //récupère le nombre d'athlete que le coach a déjà match
-        $numberAthleteMatchByMe = Database::getInstance() -> getNumberMatcheMehInDB($informationOfMe["idCoach"]);
-
+        $numberAthleteMatchByMe = Database::getInstance() -> getNumberMatcheMehInDB($informationOfMeCoach["idCoach"]);
+        
         do
         {
-
-            //regarde si l'athlete a afficher est supérieur au nombre d'athlete total (rentre si c'est suppérieur)
-            if ($idAthleteToDisplay > $numberAthleteMatchByMe["COUNT(fkAthlete)"] || $_SESSION["idAthleteMatcheMeToDisplay"] > $numberAthleteMatchByMe["COUNT(fkAthlete)"])
+            //regarde que le nombre d'athlete n'est pas vide (car cela ne sera pas un int mais un string initialisé a "empty")
+            if (!empty($numberAthleteMatchByMe))
             {
-                //remet les variable consérné a 1 (l'id du premier athlete a afficher théoriquement)
-                $idAthleteToDisplay = 1;
-                $_SESSION["idAthleteMatcheMeToDisplay"] = 1;
+                //regarde si l'athlete a afficher est supérieur au nombre d'athlete total (rentre si c'est suppérieur)
+                if (($idAthleteToDisplay > $numberAthleteMatchByMe[0]["fkAthlete"]) || ($_SESSION["idAthleteMatcheMeToDisplay"] > $numberAthleteMatchByMe[0]["fkAthlete"]))
+                {
+                    //remet les variable consérné a 1 (l'id du premier athlete a afficher théoriquement)
+                    $idAthleteToDisplay = 1;
+                    $_SESSION["idAthleteMatcheMeToDisplay"] = 1;
+                }
             }
-
+            
             //regarde si le nombre que l'utilisateur peut encore match est a 0
             if ($numberAthleteMatchMe["COUNT(fkAthlete)"] == 0)
             {
@@ -112,15 +115,14 @@ class NextChoiceMeeting
             }
             
             //le prochain athlete qui va etre afficher
-            $athleteToDisplay = Database::getInstance() -> findNextAthlete($informationOfMe["idCoach"], $idAthleteToDisplay);
+            $athleteToDisplay = Database::getInstance() -> findNextAthlete($informationOfMeCoach["idCoach"], $idAthleteToDisplay);
             
             if (!empty($athleteToDisplay))
             {
                 //met les info du coach dans un $Post
                 $_POST["Information"] = $athleteToDisplay;
             }
-
-            if (empty($athleteToDisplay))
+            else
             {
                 $idAthleteToDisplay+=1;
             }

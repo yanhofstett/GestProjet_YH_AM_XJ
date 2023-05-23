@@ -99,3 +99,6 @@ INSERT INTO `t_athlete` (`idAthlete`, `athName`, `athSurname`, `athEmail`, `athP
 -- ajoute les coachs ( les mot de passe sont 123 )
 INSERT INTO `t_coach` (`idCoach`, `coaName`, `coaSurname`, `coaEmail`, `coaPassword`, `coaPhone`, `coaExperience`, `coaImage`, `coaIsAdministrator`, `coaIsCoach`) VALUES ('1', 'tata', 'coach', 'uzguzg1@gmail.com', '$2y$10$CbKGPjyDRgQjYs38fg7MBOkluoP12ZyY1wiCuI2IDeex/W8ZD6lXe', '0787776643', 'rien', 'r', '1', '1');
 INSERT INTO `t_coach` (`idCoach`, `coaName`, `coaSurname`, `coaEmail`, `coaPassword`, `coaPhone`, `coaExperience`, `coaImage`, `coaIsAdministrator`, `coaIsCoach`) VALUES ('2', 'titi', 'coach', 'bsdjuusdu@gmail.com', '$2y$10$CbKGPjyDRgQjYs38fg7MBOkluoP12ZyY1wiCuI2IDeex/W8ZD6lXe', '0787776644', 'tout', 'r', '0', '1');
+
+-- ajoute les activité
+INSERT INTO `t_activity` (`idActivity`, `actActivite`) VALUES (NULL, 'Badminton'), (NULL, 'Grimpe'), (NULL, 'Foot'), (NULL, 'ping pong'), (NULL, 'Marche');

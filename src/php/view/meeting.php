@@ -13,12 +13,32 @@
         }
         
         echo "Bienvenue Athlete <br>";
-        
+        //./userContent/images/1.jpg
         //appele la méthode pour trouver le coach a afficher
         $idCoachMatch = NextChoiceMeeting::getInstance() -> coachDisplay($_SESSION["idCoachToDisplay"]);
     
         if (isset($_POST["Information"]))
         {
+        ?>
+            <div class="card" onclick="flipCard()">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <img src="./userContent/images/<?=$_POST["Information"][0]["coaImage"]?>" alt="Carte">
+                    </div>
+                    <div class="card-back">
+                        <div class="card-text">
+                            <?php
+                                //récupère tout se que le coach fait comme sport
+                                
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script src="./src/js/card.js"></script>
+
+        <?php
             var_dump($_POST["Information"]);
         }
 
@@ -65,6 +85,13 @@
             echo "plus rien a afficher";
         }
     }
+
+
+
+
+
+
+
     //sinon regarde si la personne connecter est connecter en tant que coach
     else if (isset($_SESSION["isCoach"]))
     {
@@ -133,3 +160,9 @@
 
     }
 ?>
+<script>
+function flipCard() {
+    var card = document.querySelector('.card');
+    card.classList.toggle('card-flipped');
+  }
+</script>

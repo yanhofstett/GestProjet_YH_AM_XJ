@@ -287,7 +287,9 @@ class Database
      */
     public function findNextAthlete($idMe, $idAthleteToDisplay)
     {
-        $query = "SELECT `idAthlete`,`athName`,`athSurname`,`athEmail`,`athPassword`,`athPhone`,`athTown`,`athNPA` FROM `t_athlete` JOIN t_select ON `fkAthlete`=`idAthlete` WHERE fkCoach = :idMe && `validateCoach` = 0 && `fkAthlete` = :idAthleteToDisplay ORDER BY fkAthlete ASC LIMIT 1";
+        $query = "SELECT `idAthlete`,`athName`,`athSurname`,`athEmail`,`athPassword`,`athPhone`,`athTown`,`athNPA` 
+        FROM `t_athlete` JOIN t_select ON `fkAthlete`=`idAthlete` 
+        WHERE fkCoach = :idMe && `validateCoach` = 0 && `fkAthlete` = :idAthleteToDisplay ORDER BY fkAthlete ASC LIMIT 1";
         
         $binds["idMe"]=["value"=>$idMe, "type"=>PDO::PARAM_INT];
         $binds["idAthleteToDisplay"]=["value"=>$idAthleteToDisplay, "type"=>PDO::PARAM_INT];
@@ -379,15 +381,13 @@ class Database
      */
     public function getNumberMatcheMehInDB($idCoach)
     {
-        $query = "SELECT COUNT(fkAthlete) FROM t_select WHERE fkCoach = :fkCoach";
-            
-        $binds["fkCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
+        $query = "SELECT `fkAthlete` FROM `t_select` ORDER BY `fkAthlete` DESC LIMIT 1";
         
-        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+        $prepareTemp = $this->querySimpleExecute($query);
 
         $prepareTabTemp = $this->formatData($prepareTemp);
 
-        return $prepareTabTemp[0];
+        return $prepareTabTemp;
     }
 
     /**
@@ -426,7 +426,7 @@ class Database
     /**
      * permet de modifier les information de l'utilisateur
      */
-    public function modifyUser($id,$name,$surname,$email,$phone,$street,$town,$npa,$password)
+    public function modifyAthlete($id,$name,$surname,$email,$phone,$street,$town,$npa,$password)
     {
         $query="UPDATE `t_athlete` SET athName = :athName, athSurname = :athSurname , athEmail = :athEmail , athPassword = :athPassword , athPhone = :athPhone , athStreet = :athStreet , athTown = :athTown , athNPA = :athNPA  WHERE idAthlete = :idAthlete";
 
@@ -442,6 +442,39 @@ class Database
         
         $this->queryPrepareExecute($query, $binds);
     }
+
+    /**
+     * permet de modifier les information de l'utilisateur
+     */
+    public function modifyCoach($id,$pseudo,$email,$password)
+    {
+        $query="UPDATE `t_coach` SET `coaName` = '1', `coaSurname` = '1', `coaEmail` = '1', `coaPassword` = '1', `coaPhone` = '1', `coaExperience` = '1', `coaImage` = '1' WHERE `t_coach`.`idCoach` = 3";
+
+        $binds["id"]=["value"=>$id, "type"=>PDO::PARAM_INT];
+        $binds["usePseudo"]=["value"=>$pseudo, "type"=>PDO::PARAM_STR];
+        $binds["useEmail"]=["value"=>$email, "type"=>PDO::PARAM_STR];
+        $binds["usePassword"]=["value"=>$password, "type"=>PDO::PARAM_STR];
+        
+        $this->queryPrepareExecute($query, $binds);
+    }
+
+    /**
+     * 
+     */
+    public function getActivityCoach($idCoach)
+    {
+        $query = "UPDATE t_select SET `validateCoach` = 1 WHERE `fkAthlete` = :fkAthlete && `fkCoach` = :fkCoach";
+        
+        $binds["fkAthlete"]=["value"=>$idAthlete, "type"=>PDO::PARAM_INT];
+        $binds["fkCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
+        
+        $prepareTemp = $this->queryPrepareExecute($query,$binds);
+
+        $prepareTabTemp = $this->formatData($prepareTemp);
+
+        return $prepareTabTemp;
+    }
+
 }
 
 

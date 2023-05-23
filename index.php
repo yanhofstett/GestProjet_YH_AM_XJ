@@ -13,7 +13,7 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="../../resources/css/style.css" rel="stylesheet" type="text/css">
+        <link href="./resources/css/style.css" rel="stylesheet" type="text/css">
     </head>
     
     <?php
@@ -24,6 +24,9 @@ Description : page qui permet de rediriger ver les différentes page de notre si
     //ajoute le fichier qui gère les requette SQL
     include 'src/php/controller/config.php';
     require "src/php/model/modelDB.php";
+
+    //modifie le temps max de l'execution du script
+    set_time_limit(420);
 
     //session_destroy();
     $_SESSION["isConnected"]=1;
