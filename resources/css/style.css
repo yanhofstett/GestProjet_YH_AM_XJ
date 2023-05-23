@@ -16,6 +16,10 @@ Description : CSS Pour toutes les pages du site
 
 /*Style CSS pour le projet pour le site du module 151*/
 
+*{
+    font-family: InterLight;
+}
+
 body{
     color: #c4c4c4;
     font-family: InterMedium;
@@ -317,13 +321,10 @@ border-radius: 5px;
 
 /*Style de la page pour suprimmer une donnée dans la base de donnée depuis le site*/
 
-
-
-
-
+/*Style pour les cartes des utilisateurs*/
 .card {
-    width: 200px;
-    height: 200px;
+    width: 450px;
+    height: 450px;
     perspective: 1000px;
     cursor: pointer;
     position: relative;
@@ -356,7 +357,6 @@ border-radius: 5px;
   }
   
   .card-back {
-    background-color: red;
     transform: rotateY(180deg);
     display: flex;
     justify-content: center;
@@ -374,4 +374,35 @@ border-radius: 5px;
   .card-flipped .card-back {
     visibility: visible;
   }
+
+  .card-text {
+    overflow-y: auto; /* Ajouter une barre de défilement si nécessaire */
+    max-height: 400px; /* Modifier la hauteur maximale selon vos besoins */
+    z-index: 2;
+  }
+
+  .card-back-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond noir avec une opacité de 0.5 */
+    background-size: cover;
+    filter: blur(20px); /* Appliquer un flou à l'arrière-plan */
+    pointer-events: none; /* Ignorer les événements de souris sur l'élément de fond */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
   
+  .card-back-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond noir avec une opacité de 0.5 */
+  }

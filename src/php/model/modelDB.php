@@ -133,7 +133,7 @@ class Database
     public function getOneCoach($email)
     {
         //récupére l'id de l'utilisateur, le login, l'email, le mot de passe, si oui ou non il est admin
-        $query = "SELECT idCoach, coaName, coaSurname, coaEmail, coaPassword, coaPhone, coaExperience, coaImage FROM t_coach WHERE coaEmail = :coaEmail";
+        $query = "SELECT idCoach, coaName, coaSurname, coaEmail, coaPassword, coaPhone, coaImage FROM t_coach WHERE coaEmail = :coaEmail";
         //avoir la requête sql pour un utilisateur (utilisation de l'emial de l'utilisateur)
         $binds['coaEmail']=['value'=>$email,'type'=>PDO::PARAM_STR];
 
@@ -271,7 +271,7 @@ class Database
      */
     public function findNextCoach($idCoachToDisplay)
     {
-        $query = "SELECT idCoach,coaName,coaSurname,coaEmail,coaPassword,coaPhone,coaExperience,coaImage FROM t_coach WHERE idCoach = :idNextCoach";
+        $query = "SELECT idCoach,coaName,coaSurname,coaEmail,coaPassword,coaPhone,coaImage FROM t_coach WHERE idCoach = :idNextCoach";
         
         $binds["idNextCoach"]=["value"=>$idCoachToDisplay, "type"=>PDO::PARAM_INT];
         
@@ -448,7 +448,7 @@ class Database
      */
     public function modifyCoach($id,$pseudo,$email,$password)
     {
-        $query="UPDATE `t_coach` SET `coaName` = '1', `coaSurname` = '1', `coaEmail` = '1', `coaPassword` = '1', `coaPhone` = '1', `coaExperience` = '1', `coaImage` = '1' WHERE `t_coach`.`idCoach` = 3";
+        $query="UPDATE `t_coach` SET `coaName` = '1', `coaSurname` = '1', `coaEmail` = '1', `coaPassword` = '1', `coaPhone` = '1', `coaImage` = '1' WHERE `t_coach`.`idCoach` = 3";
 
         $binds["id"]=["value"=>$id, "type"=>PDO::PARAM_INT];
         $binds["usePseudo"]=["value"=>$pseudo, "type"=>PDO::PARAM_STR];
@@ -463,9 +463,8 @@ class Database
      */
     public function getActivityCoach($idCoach)
     {
-        $query = "UPDATE t_select SET `validateCoach` = 1 WHERE `fkAthlete` = :fkAthlete && `fkCoach` = :fkCoach";
+        $query = "SELECT actActivite FROM `t_do` JOIN t_activity ON idActivity=fkActivity WHERE `fkCoach` = :fkCoach";
         
-        $binds["fkAthlete"]=["value"=>$idAthlete, "type"=>PDO::PARAM_INT];
         $binds["fkCoach"]=["value"=>$idCoach, "type"=>PDO::PARAM_INT];
         
         $prepareTemp = $this->queryPrepareExecute($query,$binds);

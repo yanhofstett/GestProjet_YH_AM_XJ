@@ -18,7 +18,7 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="./index.php" class="nav-link px-2 link-dark">Accueil</a></li>
             
-            <li><a href="#" class="nav-link px-2 link-secondary">#</a></li>
+            <li><a href="./index.php?page=conv" class="nav-link px-2 link-secondary">Conversation</a></li>
             
             <li><a href="#" class="nav-link px-2 link-secondary">#</a></li>
             
@@ -31,7 +31,6 @@
             <ul class="dropdown-menu text-small">
                 <!--ajoute les options de la liste déroulante-->
                 <li><a class="dropdown-item" href="./index.php?page=profile">Profil</a></li>
-                <li><a class="dropdown-item" href="./index.php?page=conv">Conversation avec les coaches</a></li>
                 
                 <!--met un trait pour séparer les option-->
                 <li><hr class="dropdown-divider"></li>

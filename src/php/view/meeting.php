@@ -23,20 +23,29 @@
             <div class="card" onclick="flipCard()">
                 <div class="card-inner">
                     <div class="card-front">
-                        <img src="./userContent/images/<?=$_POST["Information"][0]["coaImage"]?>" alt="Carte">
+                    <img src="./userContent/images/<?=$_POST["Information"][0]["coaImage"]?>" alt="Carte">
                     </div>
                     <div class="card-back">
-                        <div class="card-text">
-                            <?php
-                                //récupère tout se que le coach fait comme sport
-                                
-                            ?>
-                        </div>
+                    <div class="card-text">
+                        <?php
+                        // Récupérer toutes les activités du coach
+                        $activityOfCoach = Database::getInstance()->getActivityCoach($_POST["Information"][0]["idCoach"]);
+                        
+                        if (!empty($activityOfCoach)) {
+                            echo "<ul>";
+                            foreach ($activityOfCoach as $activity) {
+                            echo "<li>".$activity['actActivite']."</li>";
+                            }
+                            echo "</ul>";
+                        } else {
+                            echo "Aucune activité trouvée.";
+                        }
+                        ?>
+                    </div>
+                    <div class="card-back-image" style="background-image: url('./userContent/images/floutee/<?=$_POST["Information"][0]["coaImage"]?>')"></div>
                     </div>
                 </div>
             </div>
-
-            <script src="./src/js/card.js"></script>
 
         <?php
             var_dump($_POST["Information"]);
@@ -85,13 +94,6 @@
             echo "plus rien a afficher";
         }
     }
-
-
-
-
-
-
-
     //sinon regarde si la personne connecter est connecter en tant que coach
     else if (isset($_SESSION["isCoach"]))
     {
