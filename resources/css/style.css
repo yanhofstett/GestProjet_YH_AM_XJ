@@ -59,7 +59,7 @@ select {
 }
 
 .ftco-section {
-    padding: 3em 0;
+    padding: 16em 0;
 }
 
 .link-dark{
@@ -291,10 +291,10 @@ font-family: InterLight;
 
 .signin-form{
 position: absolute;
-width: 100%;
-height: 1706%;
+width: 330px;  
+height: 360px;
 padding: 9px;
-background-color: rgb(203 24 24 / 18%);
+background-color: rgba(0, 0, 0, 0.096);
 border-radius: 5px;
 }
 
@@ -303,34 +303,10 @@ border-radius: 5px;
     width: 370px;
     height: 220px;
     padding: 9px;
-    background-color: rgb(203 24 24 / 18%);
+    background-color: rgba(0, 0, 0, 0.096);
     border-radius: 5px;
 }
 
-.divTitle{
-    border-bottom: 0.2px solid white;
-    width: 90%;
-    margin: auto;
-}
-
-.coachIntero{
-    margin-left: 52%;
-}
-.activeCoachRegister{
-    color: red;
-}
-
-.athleteIntero{
-    margin-left: 5%;
-}
-.activeAthleteRegister{
-    color: red;
-}
-
-.isWhat{
-    border: 2px solid black;
-    border-radius: 40px;
-}
 /*Style de la page modify*/
 
 .formulaireModifie{
@@ -343,8 +319,105 @@ border-radius: 5px;
     margin-left: 18%;
 }
 
-/*Style de la page pour suprimmer une donnée dans la base de donnée depuis le site*/
+/*Style pour les cartes des utilisateurs*/
+.card {
+    width: 450px;
+    height: 450px;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .card-inner {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+  }
+  
+  .card-flipped .card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .card-front,
+  .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+  }
+  
+  .card-front img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 1%;
+  }
+  
+  .card-back {
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    color: white;
+    font-weight: bold;
+    visibility: hidden;
+  }
+  
+  .card-flipped .card-front {
+    visibility: hidden;
+  }
+  
+  .card-flipped .card-back {
+    visibility: visible;
+  }
 
-p{
-    margin-bottom: 0rem!important;
-}
+  .card-text {
+    text-align: left;
+    overflow-y: auto; /* Ajouter une barre de défilement si nécessaire */
+    max-height: 400px; /* Modifier la hauteur maximale selon vos besoins */
+    z-index: 2;
+  }
+
+  .card-back-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond noir avec une opacité de 0.5 */
+    background-size: cover;
+    filter: blur(20px); /* Appliquer un flou à l'arrière-plan */
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+  }
+  
+  .card-back-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond noir avec une opacité de 0.5 */
+  }
+
+  .image-container {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Applique une bordure arrondie */
+    overflow: hidden;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
