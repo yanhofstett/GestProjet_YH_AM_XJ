@@ -130,28 +130,9 @@
 					<div class="col-md-6 col-lg-4">
 						<div class="login-wrap p-0">
 							<h3 class="mb-4 text-center">Enregistrez-vous!</h3>
-							<form action="checkRegister.php" method="post" class="signin-form">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="Entrez un nouveau pseudo" name="pseudo" required>
-								</div>
-								<div class="form-group">
-									<input type="email" class="form-control" placeholder="Entrez votre e-mail" name="email" required>
-								</div>
-								<div class="form-group">
-									<input id="password-field" type="password" name="password" class="form-control" placeholder="Entrez votre mot de passe" required>
-									<span toggle="#password-field" class="fa fa-fw field-icon toggle-password"></span>
-								</div>
-								<div class="form-group">
-									<input id="password-field" type="password" name="passwordVerif" class="form-control" placeholder="Repetez le mot de passe" required>
-									<span toggle="#password-field" class="fa fa-fw field-icon toggle-password"></span>
-								</div>
-								<div class="form-group">
-									<button type="submit" name="btnRegister" class="form-control btn btn-primary submit px-3">s'enregistrer</button>
-									<a class="loginRegisterAnswer" href="login.php">Déjà un compte ?</a>
-								</div>
-								<div class="form-group d-md-flex">
-								</div>
-							</form>
+							<a class="athleteRegister" style="font-size: 170%;" href="registerAthlete.php">Athlete ?</a>							
+							<a class="CoachRegister" style="font-size: 170%; margin-left: 35%;" href="registerCoach.php">Coach ?</a>
+							<a class="loginRegisterAnswer" href="login.php">Déjà un compte ?</a>
 						</div>
 					</div>
 				</div>

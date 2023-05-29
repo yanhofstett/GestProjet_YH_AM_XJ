@@ -59,16 +59,34 @@ define('ADDED_ERROR_MESSAGE', "❌La recette n'à bien été ajoutée, veuillez 
 define('CREATE_USER_CORRECT', "✔️Votre compte à bien été crée, vous pouvez désormais vous connecté✔️");
 
 // ##bis
-define('CREATE_USER_FAILED', "❌Votre compte n'a pas été crée, entrez le même mot de passe sur les deux cases de mot de passe et qu'il soit d'au moins 4 caractère, une majuscule et une minuscule. Et un e-mail valide, votre pseudo est peut-être déjà utiliser, seul les caractère suivant sont accepter = a - z, A - Z, 0 - 9, ç, û, é, à, è, î, ,, ., !, ?, -, espace. Au delà de ces caractère votre compte ne peut pas se crée...❌");
+define('CREATE_USER_FAILED', "❌Votre compte n'a pas été crée, entrez le même mot de passe sur les deux cases de mot de passe et qu'il soit d'au moins 4 caractère, une majuscule et une minuscule. Et un e-mail valide, votre pseudo est peut-être déjà utiliser, seul les caractère suivant sont accepter = a - z, A - Z, 0 - 9, ç, û, é, à, è, î, ,, ., !, ?, -, espace.❌");
 
 // ##bis
-define('REGISTER_PSEUDO_ALREADY_ORNOT', "❌Votre compte n'a pas été crée, car le champs pseudo est vide ou votre pseudo est déjà utiliser, seul les caractère suivant sont accepter = a - z, A - Z, 0 - 9, ç, û, é, à, è, î, ,, ., !, ?, -, espace. Au delà de ces caractère votre compte ne peut pas se crée...❌");
+define('REGISTER_NAME_ALREADY_ORNOT', "❌Votre compte n'a pas été crée, car le champs du nom est vide ou fait plus de 50 caractères, seul les caractères suivant sont accepter = a - z, A - Z, ç, é, à, è, ê, â.❌");
 
 // ##bis
-define('REGISTER_EMAIL_ALREADY_ORNOT', "❌Votre compte n'a pas été crée, le champs pour l'email ne peut pas être vide et entrez et un e-mail valide et qui n'est pas utiliser, seul les caractère suivant sont accepter = a - z, A - Z, 0 - 9, ç, û, é, à, è, î, ,, ., !, ?, -, espace. Au delà de ces caractère votre compte ne peut pas se crée...❌");
+define('REGISTER_SURNAME_ALREADY_ORNOT', "❌Votre compte n'a pas été crée, car le champs du prénom est vide ou fait plus de 50 caractères, seul les caractères suivant sont accepter = a - z, A - Z, ç, é, à, è, ê, â.❌");
 
 // ##bis
-define('REGISTER_PASSWORD_DOESNT_MATCH', "❌Votre compte n'a pas été crée, le champs pe peut pas être vide et ou ne correspond pas à la vérification, seul les caractère suivant sont accepter = a - z, A - Z, 0 - 9, ç, û, é, à, è, î, ,, ., !, ?, -, espace. Au delà de ces caractère votre compte ne peut pas se crée...❌");
+define('REGISTER_PHONE_ALREADY_ORNOT', "❌Votre compte n'a pas été crée, car le champs du téléphone est vide ou fait plus de 20 caractères, il doit être conforme à ce format +41 00 000 00 00 ou 000 000 00 00.❌");
+
+// ##bis
+define('REGISTER_TOWN_ALREADY_ORNOT', "❌Votre compte n'a pas été crée, car le champs de la ville est vide ou fait plus de 100 caractères. Au delà de ces restrictions votre compte ne peut pas se crée...❌");
+
+// ##bis
+define('REGISTER_NPA_ALREADY_ORNOT', "❌Votre compte n'a pas été crée, car le champs du code postal est vide ou fait plus de 6 caractères et ne doit comporter que des chiffres de 0 à 9.❌");
+
+// ##bis
+define('REGISTER_EX_ALREADY_ORNOT', "❌Votre compte n'a pas été crée, car le champs sur votre experience est vide ou fait plus de 1000 caractères.❌");
+
+// ##bis
+define('REGISTER_EMAIL_FAIL', "❌Problème le champs d'email ne peut pas être vide et entrez, seul les caractère suivant sont accepter = a - z, A - Z, 0 - 9, ç, û, é, à, è, î, ,, ., !, ?, -, espace.❌");
+
+// ##bis
+define('REGISTER_EMAIL_ALREADY_EXIST', "❌L'email est déjà pris, votre compte ne peut pas se crée...❌");
+
+// ##bis
+define('REGISTER_PASSWORD_DOESNT_MATCH', "❌Le mot de passe doit contenir entre 12 et 32 caractères, une majuscule un chiffre et une minuscule ❌");
 
 
 // ##bis
@@ -97,21 +115,21 @@ define('EMAIL_MESSAGE_SEND_CORRECT', "✔️Wow! Parfait, votre message vient d'
 define('EMAIL_MESSAGE_SEND_ERROR', "❌Oups! Le système n'adère pas à votre message, réssayez maintenant ou plus tard❌");
 
 // ##bis
-define('EMAIL_MESSAGE_SEND_ERROR_MISSING_NAME', "❌Aie! Le message n'a pas été envoyer, le champs du nom ne peut pas être vide❌");
+define('EMAIL_MESSAGE_SEND_ERROR_MISSING_NAME', "❌Aie! Le nom ne peut pas être vide (Caractères entre 3 et 50 autorisés : é, è, ü, ä, ö, ø, à, ', ê, â, ç, a-z, A-Z)❌");
 
 // ##bis
-define('EMAIL_MESSAGE_SEND_ERROR_MISSING_SURNAME', "❌Aie! Le message n'a pas été envoyer, le champs du prénom ne peut pas être vide❌");
+define('EMAIL_MESSAGE_SEND_ERROR_MISSING_SURNAME', "❌Aie! Le prénom ne peut pas être vide (Caractères entre 3 et 50 autorisés : é, è, ü, ä, ö, ø, à, ', ê, â, ç, a-z, A-Z)❌");
 
 // ##bis
-define('EMAIL_MESSAGE_SEND_ERROR_MISSING_LOCAL', "❌Aie! Le message n'a pas été envoyer, le champs de la localité ne peut pas être vide❌");
+define('EMAIL_MESSAGE_SEND_ERROR_MISSING_LOCAL', "❌Aie! La localité ne peut pas être vide ou doit être dans ce format : Ville(,) 1800❌");
 
 // ##bis
-define('EMAIL_MESSAGE_SEND_ERROR_MISSING_PHONE', "❌Aie! Le message n'a pas été envoyer, le champs du téléphone ne peut pas être vide ou doit être valide, et seul ce format est valide : +41 79 000 00 00❌");
+define('EMAIL_MESSAGE_SEND_ERROR_MISSING_PHONE', "❌Aie! Le du téléphone ne peut pas être vide ou doit être valide, et seul ce format est valide : +41 79 000 00 00 ou 079 000 00 00❌");
 
 // ##bis
-define('EMAIL_MESSAGE_SEND_ERROR_MISSING_MAIL', "❌Aie! Le message n'a pas été envoyer,  le champs de l'email ne peut pas être vide ou doit être valide, et seul ce format est valide : exemple@gmail.ch / exemple.deux@glo.com❌");
+define('EMAIL_MESSAGE_SEND_ERROR_MISSING_MAIL', "❌Aie! L'email ne peut pas être vide ou doit être valide, et seul ce format est valide : exemple@gmail.ch / exemple.deux@glo.com❌");
 
 // ##bis
-define('EMAIL_MESSAGE_SEND_ERROR_MISSING_REM', "❌Aie! Le message n'a pas été envoyer, soit les cases sont vides et doit contenir minimum 10 caractère et maximum 450❌");
+define('EMAIL_MESSAGE_SEND_ERROR_MISSING_REM', "❌Aie! Le message ne peut pas être vides et doit contenir minimum 15 caractère et maximum 450❌");
 
 ?>

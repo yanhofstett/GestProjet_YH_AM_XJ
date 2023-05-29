@@ -119,6 +119,29 @@
                 <!-- Ouvre le php -->
                 <?php   
             }
+            // Si le GET est égal à CUC
+            else if($_GET['msgConnexion']=='CCEM')
+            {
+                // Afficher le message que la modification a réussi depuis le config.php
+                echo CONNECTOR_CONNEXION_ERROR_MESSAGE;
+                ?>
+                <!-- Script Javascript -->
+                <script>
+                    //Crée un timeout qui va s'écouler avant de faire myFunction
+                    setTimeout(myFunction, 4000);
+
+                    // Création d'une fonction
+                    function myFunction()
+                    {    
+                        // Redirige vers la page de login
+                        location.href="login.php";
+                    }
+                // Fin du script
+                </script>
+
+                <!-- Ouvre le php -->
+                <?php   
+            }
         }
         #endregion
 
@@ -145,6 +168,11 @@
 	<link rel="icon" type="image/x-icon" href="../../../resources/images/favicon.png">
 	</head>
 	<header>
+		<div class="divTitle">
+			<h1>
+				GUG
+			</h1>
+		</div>
 	</header>
 	<body class="img js-fullheight" style="background-image: url(../../../resources/images/???);">
 		<section class="ftco-section">
