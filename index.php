@@ -15,43 +15,15 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="../../resources/css/style.css" rel="stylesheet" type="text/css">
     </head>
-    
     <?php
-
     //commence le système de session
     session_start();
 
     //ajoute le fichier qui gère les requette SQL
-    include 'src/php/controller/config.php';
-    require "src/php/model/modelDB.php";
+    include_once('src/php/controller/config.php');
+    require_once('src/php/model/modelDB.php');
 
-    //regarde si l'utilisateur n'est pas connecter pour le rediriger ver la page de connection (car pour visité le site on doit être connecté)
-    if(!isset($_SESSION["isConnected"]))
-    {
-        //redirige ver la page de connection
-        header("Location:src/php/view/login.php");
-        exit;
-    }
-
-    //si il n'y a pas de GET dans l'URL (donc qu'il arrive pour la premiere fois sur le site)
-    if (!isset($_GET['page'])) 
-    {
-        //regarde si il est athlète ou un coach
-        if (isset($_SESSION["isAthlete"]) || isset($_SESSION["isCoach"]))
-        {
-            $_GET['page'] = 'meet';
-        }
-        else
-        {
-            $_GET['page'] = "";
-        }
-    }
-    
-    //affiche la barre de navigation
-    include("src/php/view/navBar.php");
-
-
-#region tout les messages quand on a effectué quelque chose sur le site
+    #region tout les messages quand on a effectué quelque chose sur le site
     #region messages dans l'index après avoir modifiés
 
     // Si le GET à été entré
@@ -66,8 +38,15 @@ Description : page qui permet de rediriger ver les différentes page de notre si
         // Sinon si le GET est égal à MEM
         else if($_GET['msgModify']=='MEM')
         {
-            // Affiche le message d'erreur et que la modification n'a pas pu aboutir depuis le config.php
-            echo MODIFY_ERROR_MESSAGE;      
+            ?>
+            <p class="hideInfoText">*</p>
+            <p class="text">
+                <?php
+                    // Affiche le message d'erreur et que la modification n'a pas pu aboutir depuis le config.php
+                    echo MODIFY_ERROR_MESSAGE;   
+                ?>
+            </p>
+            <?php     
         }
     }
     #endregion
@@ -167,6 +146,35 @@ Description : page qui permet de rediriger ver les différentes page de notre si
 
     #endregion
 
+
+    //modifie le temps max de l'execution du script
+    set_time_limit(420);
+
+    //regarde si l'utilisateur n'est pas connecter pour le rediriger ver la page de connection (car pour visité le site on doit être connecté)
+    if(!isset($_SESSION["isConnected"]))
+    {
+        //redirige ver la page de connection
+        header("Location:src/php/view/login.php");
+        exit;
+    }
+
+    //si il n'y a pas de GET dans l'URL (donc qu'il arrive pour la premiere fois sur le site)
+    if (!isset($_GET['page'])) 
+    {
+        //regarde si il est athlète ou un coach
+        if (isset($_SESSION["isAthlete"]) || isset($_SESSION["isCoach"]))
+        {
+            $_GET['page'] = 'meet';
+        }
+        else
+        {
+            $_GET['page'] = "";
+        }
+    }
+
+    //affiche la barre de navigation
+    include("src/php/view/navBar.php");
+
     //regarde sur quelle page il veut aller
     switch($_GET["page"])
     {
@@ -178,6 +186,9 @@ Description : page qui permet de rediriger ver les différentes page de notre si
             break;
         case "convDetail":
             $pageChose = "conversationDetailMessage";
+            break;
+        case "profile":
+            $pageChose = "profile";
             break;
         case "contact":
             $pageChose = "contact";
@@ -192,6 +203,5 @@ Description : page qui permet de rediriger ver les différentes page de notre si
 
     //affiche le footer
     include("src/html/footer.html");
-
     ?>
-</html>
+    </html>

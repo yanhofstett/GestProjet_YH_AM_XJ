@@ -1,5 +1,5 @@
-    <!---
-    Auteur : Alexandre Montandon
+    <!--
+    Auteur : Alexandre Montandon, Xavier Jaquet, Yann Hofstetter
     Date : 29.11.2022    
     Description : Projet module 151 // Page de contact
     --->
@@ -120,7 +120,7 @@
                             // Écris l'email du compte
                             echo $_SESSION["email"];
                         }
-                            ?>" placeholder="ex. exemple@gmail.comㅤㅤㅤㅤㅤㅤ[𝘾𝙝𝙖𝙢𝙥𝙨 𝙤𝙗𝙡𝙞𝙜𝙖𝙩𝙤𝙞𝙧𝙚]" required>
+                        ?>" placeholder="ex. exemple@gmail.comㅤㅤㅤㅤㅤㅤ[𝘾𝙝𝙖𝙢𝙥𝙨 𝙤𝙗𝙡𝙞𝙜𝙖𝙩𝙤𝙞𝙧𝙚]" required>
                 </div>
                 <div class="divAnswer" style=" margin-bottom: 1%; ">
                     <label class="labelAnswer">Questions, remarques  : </label>
@@ -143,56 +143,6 @@
                             document.getElementById(nbrcara).innerHTML = nombre + "/" + limit;
 
                             myText.Text(myText.Text().substring(0,450))
-
-                            // Si la longueur actuelle est plus grande que 420
-                            if(nombre > 420)
-                            {
-                                // Change la couleur du nombre
-                                document.getElementById("nbrcara").style.color = "orange";
-
-                                // Fais la transition
-                                document.getElementById("nbrcara").style.transition = "color 2s ease";
-                            }
-
-                            // Si la longueur actuelle est plus petite que 420
-                            if(nombre < 420)
-                            {
-                                // Change la couleur du nombre
-                                document.getElementById("nbrcara").style.color = "#09df98";
-
-                                // Fais la transition
-                                document.getElementById("nbrcara").style.transition = "color 2s ease";
-                            }
-
-                            // Si la longueur actuelle est plus grande que 420
-                            if(nombre > 440)
-                            {
-                                // Change la couleur du nombre
-                                document.getElementById("nbrcara").style.color = "red";
-
-                                // Fais la transition
-                                document.getElementById("nbrcara").style.transition = "color 2s ease";
-                            }
-
-                            // Si la longueur actuelle est égal à 420
-                            if(nombre == 450)
-                            {
-                                // Change la couleur du nombre
-                                document.getElementById("nbrcara").style.color = "rgb(138, 42, 255)";
-
-                                // Fais la transition
-                                document.getElementById("nbrcara").style.transition = "color 2s ease";
-                            }
-
-                            // Si la longueur actuelle est plus petite que 10
-                            if(nombre < 10)
-                            {
-                                // Change la couleur du nombre
-                                document.getElementById("nbrcara").style.color = "rgb(255, 255, 0)";
-
-                                // Fais la transition
-                                document.getElementById("nbrcara").style.transition = "color 2s ease";
-                            }
                         }
                     </script>
                     <textarea type="hidden" name="message" class="textArea" id="myText" rows="5" style=" width: 50%; " minlength="10" maxlength="450" placeholder="Écrivez quelque chose ici...[𝘾𝙝𝙖𝙢𝙥𝙨 𝙤𝙗𝙡𝙞𝙜𝙖𝙩𝙤𝙞𝙧𝙚]" 

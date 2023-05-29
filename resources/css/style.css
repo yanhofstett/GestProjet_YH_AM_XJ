@@ -16,6 +16,10 @@ Description : CSS Pour toutes les pages du site
 
 /*Style CSS pour le projet pour le site du module 151*/
 
+*{
+    font-family: InterLight;
+}
+
 body{
     color: #c4c4c4;
     font-family: InterMedium;
@@ -341,3 +345,6 @@ border-radius: 5px;
 
 /*Style de la page pour suprimmer une donnée dans la base de donnée depuis le site*/
 
+p{
+    margin-bottom: 0rem!important;
+}

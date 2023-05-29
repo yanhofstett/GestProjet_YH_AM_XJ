@@ -20,7 +20,7 @@
             
             <li><a href="#" class="nav-link px-2 link-secondary">#</a></li>
             
-            <li><a href="./index.php?page=contact" class="nav-link px-2 link-secondary">Nous contacter</a></li>
+            <li><a href="./index.php?page=contact" class="nav-link px-2 link-secondary">Contact</a></li>
             
             </ul>
             
@@ -30,7 +30,7 @@
             </a>
             <ul class="dropdown-menu text-small">
                 <!--ajoute les options de la liste déroulante-->
-                <li><a class="dropdown-item" href="#">Profil</a></li>
+                <li><a class="dropdown-item" href="./index.php?page=profile">Profil</a></li>
                 <li><a class="dropdown-item" href="./index.php?page=conv">Conversation avec les coaches</a></li>
                 
                 <!--met un trait pour séparer les option-->
